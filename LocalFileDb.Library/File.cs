@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace LocalFileDb.Library
 {
-    public class Class1
-    {
-    }
+	public class File
+	{
+		public int FolderId { get; set; }		
+		public string Name { get; set; }		
+	}
 }
