@@ -2,6 +2,7 @@
 using LocalFileDb.Library;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Postulate.Lite.SqlServer.IntKey;
+using System.Data;
 using System.Data.SqlClient;
 using Tests.Classes;
 
@@ -23,8 +24,11 @@ namespace Tests
 			//Debug.Write(provider.CreateTableCommand(typeof(Folder)));
 		}
 
+		[TestMethod]
 		public void Fill()
-		{			
+		{
+			InitDbInner();
+
 			using (var cn = GetConnection())
 			{
 				var db = new Mp3Db(cn);
@@ -36,10 +40,22 @@ namespace Tests
 		{
 			using (var cn = GetConnection())
 			{
-				cn.Execute("DROP TABLE [Mp3File]");
-				cn.Execute("DROP TABLE [Folder]");
+				ExecuteIgnoreError(cn, "DROP TABLE [Mp3File]");
+				ExecuteIgnoreError(cn, "DROP TABLE [Folder]");
 				cn.CreateTable<Folder>();
 				cn.CreateTable<Mp3File>();
+			}
+		}
+
+		private void ExecuteIgnoreError(IDbConnection connection, string query, object parameters = null)
+		{
+			try
+			{
+				connection.Execute(query, parameters);
+			}
+			catch 
+			{
+				// do nothing
 			}
 		}
 	}

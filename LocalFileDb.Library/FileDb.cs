@@ -54,7 +54,7 @@ namespace LocalFileDb.Library
 
 			foreach (string subDir in folders)
 			{
-				var subfolder = new TFolder() { ParentId = folder.Id, Name = Path.GetFileName(subDir), Path = ToLocal(subDir) };
+				var subfolder = new TFolder() { ParentId = folder.Id, Name = Path.GetFileName(subDir), Path = subDir };
 				await SyncFolderAsync(connection, subfolder);
 				await SyncFilesAsync(connection, subfolder, progress);
 				await SyncDirectoriesAsync(connection, subfolder, progress);
