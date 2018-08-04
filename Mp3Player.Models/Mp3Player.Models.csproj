@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D22E1FB7-0EC8-4077-8871-CCFB5015A69E}</ProjectGuid>
+    <ProjectGuid>{936877CD-512B-4772-B8AE-1D2FBEF356A5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LocalFileDb.Library</RootNamespace>
-    <AssemblyName>LocalFileDb.Library</AssemblyName>
+    <RootNamespace>Mp3Player.Models</RootNamespace>
+    <AssemblyName>Mp3Player.Models</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,20 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapper, Version=1.50.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.1.50.5\lib\net451\Dapper.dll</HintPath>
-    </Reference>
-    <Reference Include="Id3, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ID3.0.3.0\lib\net40\Id3.dll</HintPath>
-    </Reference>
-    <Reference Include="Postulate.Lite.Core, Version=1.0.15.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Postulate.Lite.SqlServer.1.0.15\lib\net461\Postulate.Lite.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Postulate.Lite.SqlServer, Version=1.0.15.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Postulate.Lite.SqlServer.1.0.15\lib\net461\Postulate.Lite.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,13 +40,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="File.cs" />
-    <Compile Include="FileDb.cs" />
-    <Compile Include="Folder.cs" />
+    <Compile Include="Extensions\SqlExtensions.cs" />
+    <Compile Include="Mp3Db.cs" />
+    <Compile Include="Mp3File.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\LocalFileDb.Library\LocalFileDb.Library.csproj">
+      <Project>{D22E1FB7-0EC8-4077-8871-CCFB5015A69E}</Project>
+      <Name>LocalFileDb.Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ID3">
+      <Version>0.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="Postulate.Lite.SqlServer">
+      <Version>1.0.15</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

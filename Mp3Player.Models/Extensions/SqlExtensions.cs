@@ -2,7 +2,7 @@
 using Postulate.Lite.Core.Extensions;
 using System.Data.SqlClient;
 
-namespace Tests.Extensions
+namespace Mp3Player.Models.Extensions
 {
 	public static class SqlExtensions
 	{

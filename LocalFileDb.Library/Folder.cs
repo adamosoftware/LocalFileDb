@@ -1,6 +1,5 @@
 ﻿using Postulate.Lite.Core.Attributes;
 using System.ComponentModel.DataAnnotations;
-using System.Data;
 
 namespace LocalFileDb.Library
 {

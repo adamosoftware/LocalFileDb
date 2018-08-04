@@ -46,6 +46,13 @@ namespace LocalFileDb.Library
 			await SyncDirectoriesAsync(connection, folder, progress);
 		}
 
+		public abstract string GetRootPath(IDbConnection connection);		
+
+		public string GetFullPath(IDbConnection connection, TFile file)
+		{
+			return Path.Combine(GetRootPath(connection), file.Path);
+		}
+
 		private async Task SyncDirectoriesAsync(IDbConnection connection, TFolder folder, IProgress<string> progress)
 		{
 			progress?.Report($"Scanning directories in {folder.Path}");

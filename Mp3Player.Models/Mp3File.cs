@@ -1,9 +1,8 @@
-﻿using LocalFileDb.Library;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 
-namespace Tests.Classes
+namespace Mp3Player.Models
 {
 	public class Mp3File : LocalFileDb.Library.File
 	{
@@ -12,7 +11,7 @@ namespace Tests.Classes
 		public string Title { get; set; }
 		public string Artist { get; set; }
 		public string Album { get; set; }
-		public int? Year { get; set; }		
+		public int? Year { get; set; }
 
 		public override void GetMetadata(string path)
 		{

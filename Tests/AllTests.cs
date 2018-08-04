@@ -1,10 +1,10 @@
 ﻿using Dapper;
 using LocalFileDb.Library;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Mp3Player.Models;
 using Postulate.Lite.SqlServer.IntKey;
 using System.Data;
 using System.Data.SqlClient;
-using Tests.Classes;
 
 namespace Tests
 {
@@ -32,7 +32,7 @@ namespace Tests
 			using (var cn = GetConnection())
 			{
 				var db = new Mp3Db(cn);
-				db.SyncAsync(cn, @"C:\Users\Adam\SkyDrive\Music").Wait();
+				db.SyncAsync(cn, @"C:\Users\Adam\OneDrive\Music").Wait();
 			}
 		}
 

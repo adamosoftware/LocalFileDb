@@ -1,14 +1,12 @@
-﻿using LocalFileDb.Library;
-using Postulate.Lite.Core;
+﻿using Dapper;
+using LocalFileDb.Library;
+using Mp3Player.Models.Extensions;
 using Postulate.Lite.SqlServer.IntKey;
-using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Threading.Tasks;
-using Tests.Extensions;
 
-namespace Tests.Classes
+namespace Mp3Player.Models
 {
 	public class Mp3Db : FileDb<Folder, Mp3File>
 	{
@@ -26,13 +24,18 @@ namespace Tests.Classes
 		}
 
 		protected override async Task SyncFileAsync(IDbConnection connection, Mp3File file)
-		{			
-			await connection.MergeAsync(file);			
+		{
+			await connection.MergeAsync(file);
 		}
 
 		protected override async Task<int> SyncFolderAsync(IDbConnection connection, Folder folder)
 		{
 			return await connection.MergeAsync(folder);
+		}
+
+		public override string GetRootPath(IDbConnection connection)
+		{
+			return connection.QuerySingle<string>("SELECT [Path] FROM [dbo].[Folder] WHERE [ParentId]=0 AND [Name]='\'");
 		}
 	}
 }
