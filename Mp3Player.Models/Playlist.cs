@@ -5,11 +5,14 @@ using System.Data;
 
 namespace Mp3Player.Models
 {
+	[Identity(nameof(Id))]
 	public class Playlist
 	{
 		[MaxLength(50)]
 		[PrimaryKey]
 		public string Name { get; set; }
+
+		public int Id { get; set; }
 
 		public static Playlist GetNowPlaying(IDbConnection connection)
 		{

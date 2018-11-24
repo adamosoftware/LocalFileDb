@@ -22,8 +22,8 @@ namespace Mp3Player.Models
 			var cn = connection as SqlConnection;
 			if (!cn.TableExists("dbo", "Folder")) cn.CreateTable<Folder>();
 			if (!cn.TableExists("dbo", "Mp3File")) cn.CreateTable<Mp3File>();
-			//if (!cn.TableExists("dbo", "Playlist")) cn.CreateTable<Playlist>();
-			//if (!cn.TableExists("dbo", "PlaylistFile")) cn.CreateTable<PlaylistFile>();
+			if (!cn.TableExists("dbo", "Playlist")) cn.CreateTable<Playlist>();
+			if (!cn.TableExists("dbo", "PlaylistFile")) cn.CreateTable<PlaylistFile>();
 		}
 
 		protected override async Task SyncFileAsync(IDbConnection connection, Mp3File file)

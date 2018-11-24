@@ -2,6 +2,7 @@
 
 namespace Mp3Player.Models
 {
+	[Identity(nameof(Id))]
 	public class PlaylistFile
 	{
 		[References(typeof(Playlist))]
@@ -13,5 +14,7 @@ namespace Mp3Player.Models
 		public int FileId { get; set; }
 
 		public int Order { get; set; }
+
+		public int Id { get; set; }
 	}
 }
