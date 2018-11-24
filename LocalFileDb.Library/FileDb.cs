@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -33,17 +35,44 @@ namespace LocalFileDb.Library
 		/// </summary>
 		protected abstract Task SyncFileAsync(IDbConnection connection, TFile file);
 
+		protected abstract Task<IEnumerable<TFile>> GetAllFilesAsync(IDbConnection connection);
+
+		protected abstract Task RemoveFileAsync(IDbConnection connection, TFile file);
+
 		/// <summary>
 		/// Adds newly discovered files to the database, and removes those that have been deleted, while logging changes
 		/// </summary>
-		public async Task SyncAsync(IDbConnection connection, string path, IProgress<string> progress = null)
+		public async Task SyncAsync(IDbConnection connection, string path, IProgress<SyncProgress> progress = null)
 		{
+			var sw = Stopwatch.StartNew();
+
 			_path = path;
 			var folder = new TFolder() { Name = ToLocal(path), Path = path };
 			int folderId = await SyncFolderAsync(connection, folder);
+			
+			await SyncFilesAsync(connection, folder, sw, progress);
+			await SyncDirectoriesAsync(connection, folder, sw, progress);
+			await RemoveMissingFilesAsync(connection, sw, progress);
 
-			await SyncFilesAsync(connection, folder, progress);
-			await SyncDirectoriesAsync(connection, folder, progress);
+			sw.Stop();
+		}
+
+		private async Task RemoveMissingFilesAsync(IDbConnection connection, Stopwatch stopwatch, IProgress<SyncProgress> progress)
+		{
+			progress?.Report(new SyncProgress() { Message = "Removing deleted files...", Elapsed = stopwatch.Elapsed });
+
+			var allFiles = await GetAllFilesAsync(connection);
+
+			string rootPath = GetRootPath(connection);
+
+			foreach (var file in allFiles)
+			{
+				if (!System.IO.File.Exists(Path.Combine(rootPath, file.Path)))
+				{
+					progress?.Report(new SyncProgress() { Message = $"Removing {file.Path}", Elapsed = stopwatch.Elapsed });
+					await RemoveFileAsync(connection, file);
+				}
+			}
 		}
 
 		public abstract string GetRootPath(IDbConnection connection);		
@@ -53,9 +82,9 @@ namespace LocalFileDb.Library
 			return Path.Combine(GetRootPath(connection), file.Path);
 		}
 
-		private async Task SyncDirectoriesAsync(IDbConnection connection, TFolder folder, IProgress<string> progress)
+		private async Task SyncDirectoriesAsync(IDbConnection connection, TFolder folder, Stopwatch stopwatch, IProgress<SyncProgress> progress)
 		{
-			progress?.Report($"Scanning directories in {folder.Path}");
+			progress?.Report(new SyncProgress() { Message = $"Scanning directories in {folder.Path}", Elapsed = stopwatch.Elapsed });
 
 			string[] folders = Directory.GetDirectories(folder.Path);
 
@@ -63,14 +92,14 @@ namespace LocalFileDb.Library
 			{
 				var subfolder = new TFolder() { ParentId = folder.Id, Name = Path.GetFileName(subDir), Path = subDir };
 				await SyncFolderAsync(connection, subfolder);
-				await SyncFilesAsync(connection, subfolder, progress);
-				await SyncDirectoriesAsync(connection, subfolder, progress);
+				await SyncFilesAsync(connection, subfolder, stopwatch, progress);
+				await SyncDirectoriesAsync(connection, subfolder, stopwatch, progress);
 			}
 		}
 
-		private async Task SyncFilesAsync(IDbConnection connection, TFolder folder, IProgress<string> progress = null)
+		private async Task SyncFilesAsync(IDbConnection connection, TFolder folder, Stopwatch stopwatch, IProgress<SyncProgress> progress = null)
 		{
-			progress?.Report($"Getting files in {folder.Path}");
+			progress?.Report(new SyncProgress() { Message = $"Getting files in {folder.Path}", Elapsed = stopwatch.Elapsed });
 
 			foreach (string mask in IncludeFileMasks)
 			{

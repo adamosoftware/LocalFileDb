@@ -38,6 +38,8 @@ namespace Tests
 
 		private void InitDbInner()
 		{
+			return;
+
 			using (var cn = GetConnection())
 			{
 				ExecuteIgnoreError(cn, "DROP TABLE [Mp3File]");
