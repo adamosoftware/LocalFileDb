@@ -13,7 +13,7 @@ namespace Mp3Player.Models.Extensions
 
 		public static void CreateDb(this SqlConnection connection, string databaseName)
 		{
-			connection.Execute($"CREATE TABLE [{databaseName}]");
+			connection.Execute($"CREATE DATABASE [{databaseName}]");
 		}
 
 		public static bool TableExists(this SqlConnection connection, string schema, string tableName)

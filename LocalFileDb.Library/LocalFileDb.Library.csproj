@@ -36,11 +36,11 @@
     <Reference Include="Id3, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ID3.0.3.0\lib\net40\Id3.dll</HintPath>
     </Reference>
-    <Reference Include="Postulate.Lite.Core, Version=1.0.16.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Postulate.Lite.SqlServer.1.0.16\lib\net461\Postulate.Lite.Core.dll</HintPath>
+    <Reference Include="Postulate.Lite.Core, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Postulate.Lite.Core.1.2.6\lib\net461\Postulate.Lite.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Postulate.Lite.SqlServer, Version=1.0.16.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Postulate.Lite.SqlServer.1.0.16\lib\net461\Postulate.Lite.SqlServer.dll</HintPath>
+    <Reference Include="Postulate.Lite.SqlServer, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Postulate.Lite.SqlServer.1.2.6\lib\net461\Postulate.Lite.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
