@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -40,17 +41,16 @@
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
-			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.cbArtistSort = new System.Windows.Forms.ComboBox();
-			this.dgvArtists = new System.Windows.Forms.DataGridView();
+			this.lvLibrary = new System.Windows.Forms.ListView();
+			this.cmStatusBar = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStrip1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-			this.splitContainer1.Panel1.SuspendLayout();
-			this.splitContainer1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dgvArtists)).BeginInit();
+			this.cmStatusBar.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// toolStrip1
@@ -107,6 +107,7 @@
 			this.tslRootPath.Spring = true;
 			this.tslRootPath.Text = "(root path)";
 			this.tslRootPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.tslRootPath.Click += new System.EventHandler(this.tslRootPath_Click);
 			// 
 			// toolStripStatusLabel1
 			// 
@@ -133,7 +134,7 @@
 			// 
 			// tabPage1
 			// 
-			this.tabPage1.Controls.Add(this.splitContainer1);
+			this.tabPage1.Controls.Add(this.lvLibrary);
 			this.tabPage1.Location = new System.Drawing.Point(4, 30);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -152,41 +153,44 @@
 			this.tabPage2.Text = "Now Playing";
 			this.tabPage2.UseVisualStyleBackColor = true;
 			// 
-			// splitContainer1
+			// lvLibrary
 			// 
-			this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainer1.Location = new System.Drawing.Point(3, 3);
-			this.splitContainer1.Name = "splitContainer1";
+			this.lvLibrary.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lvLibrary.Location = new System.Drawing.Point(3, 3);
+			this.lvLibrary.Name = "lvLibrary";
+			this.lvLibrary.Size = new System.Drawing.Size(593, 193);
+			this.lvLibrary.TabIndex = 0;
+			this.lvLibrary.UseCompatibleStateImageBehavior = false;
+			this.lvLibrary.View = System.Windows.Forms.View.SmallIcon;
 			// 
-			// splitContainer1.Panel1
+			// cmStatusBar
 			// 
-			this.splitContainer1.Panel1.Controls.Add(this.dgvArtists);
-			this.splitContainer1.Panel1.Controls.Add(this.cbArtistSort);
-			this.splitContainer1.Size = new System.Drawing.Size(593, 193);
-			this.splitContainer1.SplitterDistance = 197;
-			this.splitContainer1.TabIndex = 0;
+			this.cmStatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.selectToolStripMenuItem,
+            this.viewToolStripMenuItem,
+            this.refreshToolStripMenuItem});
+			this.cmStatusBar.Name = "cmStatusBar";
+			this.cmStatusBar.Size = new System.Drawing.Size(181, 92);
 			// 
-			// cbArtistSort
+			// selectToolStripMenuItem
 			// 
-			this.cbArtistSort.Dock = System.Windows.Forms.DockStyle.Top;
-			this.cbArtistSort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cbArtistSort.FormattingEnabled = true;
-			this.cbArtistSort.Location = new System.Drawing.Point(0, 0);
-			this.cbArtistSort.Name = "cbArtistSort";
-			this.cbArtistSort.Size = new System.Drawing.Size(197, 21);
-			this.cbArtistSort.TabIndex = 0;
+			this.selectToolStripMenuItem.Name = "selectToolStripMenuItem";
+			this.selectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.selectToolStripMenuItem.Text = "Select Folder...";
+			this.selectToolStripMenuItem.Click += new System.EventHandler(this.selectToolStripMenuItem_Click);
 			// 
-			// dgvArtists
+			// viewToolStripMenuItem
 			// 
-			this.dgvArtists.AllowUserToAddRows = false;
-			this.dgvArtists.AllowUserToDeleteRows = false;
-			this.dgvArtists.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgvArtists.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dgvArtists.Location = new System.Drawing.Point(0, 21);
-			this.dgvArtists.Name = "dgvArtists";
-			this.dgvArtists.ReadOnly = true;
-			this.dgvArtists.Size = new System.Drawing.Size(197, 172);
-			this.dgvArtists.TabIndex = 1;
+			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+			this.viewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.viewToolStripMenuItem.Text = "View Folder";
+			this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
+			// 
+			// refreshToolStripMenuItem
+			// 
+			this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+			this.refreshToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+			this.refreshToolStripMenuItem.Text = "Update Music";
 			// 
 			// frmMain
 			// 
@@ -200,16 +204,15 @@
 			this.Name = "frmMain";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Ao Mp3 Player";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
+			this.Load += new System.EventHandler(this.frmMain_Load);
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();
 			this.statusStrip1.ResumeLayout(false);
 			this.statusStrip1.PerformLayout();
 			this.tabControl1.ResumeLayout(false);
 			this.tabPage1.ResumeLayout(false);
-			this.splitContainer1.Panel1.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-			this.splitContainer1.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dgvArtists)).EndInit();
+			this.cmStatusBar.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -228,9 +231,11 @@
 		private System.Windows.Forms.TabControl tabControl1;
 		private System.Windows.Forms.TabPage tabPage1;
 		private System.Windows.Forms.TabPage tabPage2;
-		private System.Windows.Forms.SplitContainer splitContainer1;
-		private System.Windows.Forms.DataGridView dgvArtists;
-		private System.Windows.Forms.ComboBox cbArtistSort;
+		private System.Windows.Forms.ListView lvLibrary;
+		private System.Windows.Forms.ContextMenuStrip cmStatusBar;
+		private System.Windows.Forms.ToolStripMenuItem selectToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
 	}
 }
 

@@ -24,20 +24,22 @@ namespace Mp3Player.Models
 
 			using (var stream = new FileStream(path, FileMode.Open))
 			{
-				var mp3file = new Id3.Mp3Stream(stream, Id3.Mp3Permissions.Read);
-				if (mp3file.HasTags)
+				using (var mp3file = new Id3.Mp3Stream(stream, Id3.Mp3Permissions.Read))
 				{
-					var tags = mp3file.GetAllTags();
-					if (tags.Any())
+					if (mp3file.HasTags)
 					{
-						if (!string.IsNullOrEmpty(tags[0].Title)) Title = tags[0].Title;
-						Artist = tags[0].Artists;
-						SortArtist = SortArtistName(Artist);
-						Album = tags[0].Album;
-						TrackNumber = tags[0].Track.AsInt;
-						Year = tags[0].Year.AsDateTime?.Year;
+						var tags = mp3file.GetAllTags();
+						if (tags.Any())
+						{
+							if (!string.IsNullOrEmpty(tags[0].Title)) Title = tags[0].Title;
+							Artist = tags[0].Artists;
+							SortArtist = SortArtistName(Artist);
+							Album = tags[0].Album;
+							TrackNumber = tags[0].Track.AsInt;
+							Year = tags[0].Year.AsDateTime?.Year;
+						}
 					}
-				}
+				}					
 			}
 		}
 

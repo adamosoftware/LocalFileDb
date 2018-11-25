@@ -11,12 +11,17 @@ namespace LocalFileDb.Library
 		where TFolder : Folder, new()
 		where TFile : File, new()
 	{
-		private string _path;
+		private string _path;		
 
 		public FileDb(IDbConnection connection)
 		{
 			Initialize(connection);
+			Added = new List<TFile>();
+			Removed = new List<TFile>();
 		}
+
+		public List<TFile> Added { get; private set; }
+		public List<TFile> Removed { get; private set; }
 
 		protected abstract string[] IncludeFileMasks { get; }
 
@@ -69,6 +74,7 @@ namespace LocalFileDb.Library
 			{
 				if (!System.IO.File.Exists(Path.Combine(rootPath, file.Path)))
 				{
+					Removed.Add(file);
 					progress?.Report(new SyncProgress() { Message = $"Removing {file.Path}", Elapsed = stopwatch.Elapsed });
 					await RemoveFileAsync(connection, file);
 				}
@@ -118,6 +124,7 @@ namespace LocalFileDb.Library
 						DateModified = fi.LastWriteTimeUtc,
 						Size = fi.Length
 					};
+					Added.Add(file);
 
 					file.GetMetadata(fileName);
 					await SyncFileAsync(connection, file);
