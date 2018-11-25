@@ -39,6 +39,7 @@
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -90,6 +91,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LocalFileDb.Library\LocalFileDb.Library.csproj">
+      <Project>{d22e1fb7-0ec8-4077-8871-ccfb5015a69e}</Project>
+      <Name>LocalFileDb.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mp3Player.Models\Mp3Player.Models.csproj">
+      <Project>{936877CD-512B-4772-B8AE-1D2FBEF356A5}</Project>
+      <Name>Mp3Player.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

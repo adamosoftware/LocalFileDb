@@ -36,7 +36,7 @@
 			this.btnPlayPause = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.tslRootPath = new System.Windows.Forms.ToolStripStatusLabel();
-			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+			this.tslStatus = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -89,7 +89,7 @@
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tslRootPath,
-            this.toolStripStatusLabel1,
+            this.tslStatus,
             this.toolStripProgressBar1});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 258);
 			this.statusStrip1.Name = "statusStrip1";
@@ -103,17 +103,17 @@
 			this.tslRootPath.IsLink = true;
 			this.tslRootPath.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
 			this.tslRootPath.Name = "tslRootPath";
-			this.tslRootPath.Size = new System.Drawing.Size(433, 17);
+			this.tslRootPath.Size = new System.Drawing.Size(402, 17);
 			this.tslRootPath.Spring = true;
 			this.tslRootPath.Text = "(root path)";
 			this.tslRootPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.tslRootPath.Click += new System.EventHandler(this.tslRootPath_Click);
 			// 
-			// toolStripStatusLabel1
+			// tslStatus
 			// 
-			this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-			this.toolStripStatusLabel1.Size = new System.Drawing.Size(55, 17);
-			this.toolStripStatusLabel1.Text = "{0} songs";
+			this.tslStatus.Name = "tslStatus";
+			this.tslStatus.Size = new System.Drawing.Size(55, 17);
+			this.tslStatus.Text = "{0} songs";
 			// 
 			// toolStripProgressBar1
 			// 
@@ -161,7 +161,7 @@
 			this.lvLibrary.Size = new System.Drawing.Size(593, 193);
 			this.lvLibrary.TabIndex = 0;
 			this.lvLibrary.UseCompatibleStateImageBehavior = false;
-			this.lvLibrary.View = System.Windows.Forms.View.SmallIcon;
+			this.lvLibrary.View = System.Windows.Forms.View.Tile;
 			// 
 			// cmStatusBar
 			// 
@@ -170,19 +170,19 @@
             this.viewToolStripMenuItem,
             this.refreshToolStripMenuItem});
 			this.cmStatusBar.Name = "cmStatusBar";
-			this.cmStatusBar.Size = new System.Drawing.Size(181, 92);
+			this.cmStatusBar.Size = new System.Drawing.Size(151, 70);
 			// 
 			// selectToolStripMenuItem
 			// 
 			this.selectToolStripMenuItem.Name = "selectToolStripMenuItem";
-			this.selectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.selectToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
 			this.selectToolStripMenuItem.Text = "Select Folder...";
 			this.selectToolStripMenuItem.Click += new System.EventHandler(this.selectToolStripMenuItem_Click);
 			// 
 			// viewToolStripMenuItem
 			// 
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-			this.viewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.viewToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
 			this.viewToolStripMenuItem.Text = "View Folder";
 			this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
 			// 
@@ -191,6 +191,7 @@
 			this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
 			this.refreshToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
 			this.refreshToolStripMenuItem.Text = "Update Music";
+			this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
 			// 
 			// frmMain
 			// 
@@ -225,7 +226,7 @@
 		private System.Windows.Forms.ToolStripStatusLabel tslRootPath;
 		private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
 		private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+		private System.Windows.Forms.ToolStripStatusLabel tslStatus;
 		private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
 		private System.Windows.Forms.ToolStripButton btnPlayPause;
 		private System.Windows.Forms.TabControl tabControl1;

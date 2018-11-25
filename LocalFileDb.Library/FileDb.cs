@@ -11,7 +11,7 @@ namespace LocalFileDb.Library
 		where TFolder : Folder, new()
 		where TFile : File, new()
 	{
-		private string _path;		
+		private string _path;
 
 		public FileDb(IDbConnection connection)
 		{
@@ -22,6 +22,7 @@ namespace LocalFileDb.Library
 
 		public List<TFile> Added { get; private set; }
 		public List<TFile> Removed { get; private set; }
+		public TimeSpan Elapsed { get; private set; }
 
 		protected abstract string[] IncludeFileMasks { get; }
 
@@ -60,6 +61,7 @@ namespace LocalFileDb.Library
 			await RemoveMissingFilesAsync(connection, sw, progress);
 
 			sw.Stop();
+			Elapsed = sw.Elapsed;
 		}
 
 		private async Task RemoveMissingFilesAsync(IDbConnection connection, Stopwatch stopwatch, IProgress<SyncProgress> progress)
