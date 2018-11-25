@@ -30,19 +30,27 @@
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+			this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+			this.btnPlayPause = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.tslRootPath = new System.Windows.Forms.ToolStripStatusLabel();
-			this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
 			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-			this.btnPlayPause = new System.Windows.Forms.ToolStripButton();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
+			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+			this.cbArtistSort = new System.Windows.Forms.ComboBox();
+			this.dgvArtists = new System.Windows.Forms.DataGridView();
 			this.toolStrip1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
+			this.tabPage1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+			this.splitContainer1.Panel1.SuspendLayout();
+			this.splitContainer1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dgvArtists)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// toolStrip1
@@ -56,6 +64,26 @@
 			this.toolStrip1.Size = new System.Drawing.Size(607, 25);
 			this.toolStrip1.TabIndex = 0;
 			this.toolStrip1.Text = "toolStrip1";
+			// 
+			// toolStripLabel1
+			// 
+			this.toolStripLabel1.Name = "toolStripLabel1";
+			this.toolStripLabel1.Size = new System.Drawing.Size(45, 22);
+			this.toolStripLabel1.Text = "Search:";
+			// 
+			// toolStripTextBox1
+			// 
+			this.toolStripTextBox1.Name = "toolStripTextBox1";
+			this.toolStripTextBox1.Size = new System.Drawing.Size(150, 25);
+			// 
+			// btnPlayPause
+			// 
+			this.btnPlayPause.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			this.btnPlayPause.Image = ((System.Drawing.Image)(resources.GetObject("btnPlayPause.Image")));
+			this.btnPlayPause.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnPlayPause.Name = "btnPlayPause";
+			this.btnPlayPause.Size = new System.Drawing.Size(49, 22);
+			this.btnPlayPause.Text = "Play";
 			// 
 			// statusStrip1
 			// 
@@ -75,21 +103,10 @@
 			this.tslRootPath.IsLink = true;
 			this.tslRootPath.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
 			this.tslRootPath.Name = "tslRootPath";
-			this.tslRootPath.Size = new System.Drawing.Size(348, 17);
+			this.tslRootPath.Size = new System.Drawing.Size(433, 17);
 			this.tslRootPath.Spring = true;
 			this.tslRootPath.Text = "(root path)";
 			this.tslRootPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// toolStripTextBox1
-			// 
-			this.toolStripTextBox1.Name = "toolStripTextBox1";
-			this.toolStripTextBox1.Size = new System.Drawing.Size(150, 25);
-			// 
-			// toolStripLabel1
-			// 
-			this.toolStripLabel1.Name = "toolStripLabel1";
-			this.toolStripLabel1.Size = new System.Drawing.Size(45, 22);
-			this.toolStripLabel1.Text = "Search:";
 			// 
 			// toolStripStatusLabel1
 			// 
@@ -101,15 +118,6 @@
 			// 
 			this.toolStripProgressBar1.Name = "toolStripProgressBar1";
 			this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
-			// 
-			// btnPlayPause
-			// 
-			this.btnPlayPause.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-			this.btnPlayPause.Image = ((System.Drawing.Image)(resources.GetObject("btnPlayPause.Image")));
-			this.btnPlayPause.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnPlayPause.Name = "btnPlayPause";
-			this.btnPlayPause.Size = new System.Drawing.Size(49, 22);
-			this.btnPlayPause.Text = "Play";
 			// 
 			// tabControl1
 			// 
@@ -125,6 +133,7 @@
 			// 
 			// tabPage1
 			// 
+			this.tabPage1.Controls.Add(this.splitContainer1);
 			this.tabPage1.Location = new System.Drawing.Point(4, 30);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -143,6 +152,42 @@
 			this.tabPage2.Text = "Now Playing";
 			this.tabPage2.UseVisualStyleBackColor = true;
 			// 
+			// splitContainer1
+			// 
+			this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainer1.Location = new System.Drawing.Point(3, 3);
+			this.splitContainer1.Name = "splitContainer1";
+			// 
+			// splitContainer1.Panel1
+			// 
+			this.splitContainer1.Panel1.Controls.Add(this.dgvArtists);
+			this.splitContainer1.Panel1.Controls.Add(this.cbArtistSort);
+			this.splitContainer1.Size = new System.Drawing.Size(593, 193);
+			this.splitContainer1.SplitterDistance = 197;
+			this.splitContainer1.TabIndex = 0;
+			// 
+			// cbArtistSort
+			// 
+			this.cbArtistSort.Dock = System.Windows.Forms.DockStyle.Top;
+			this.cbArtistSort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cbArtistSort.FormattingEnabled = true;
+			this.cbArtistSort.Location = new System.Drawing.Point(0, 0);
+			this.cbArtistSort.Name = "cbArtistSort";
+			this.cbArtistSort.Size = new System.Drawing.Size(197, 21);
+			this.cbArtistSort.TabIndex = 0;
+			// 
+			// dgvArtists
+			// 
+			this.dgvArtists.AllowUserToAddRows = false;
+			this.dgvArtists.AllowUserToDeleteRows = false;
+			this.dgvArtists.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvArtists.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dgvArtists.Location = new System.Drawing.Point(0, 21);
+			this.dgvArtists.Name = "dgvArtists";
+			this.dgvArtists.ReadOnly = true;
+			this.dgvArtists.Size = new System.Drawing.Size(197, 172);
+			this.dgvArtists.TabIndex = 1;
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -160,6 +205,11 @@
 			this.statusStrip1.ResumeLayout(false);
 			this.statusStrip1.PerformLayout();
 			this.tabControl1.ResumeLayout(false);
+			this.tabPage1.ResumeLayout(false);
+			this.splitContainer1.Panel1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+			this.splitContainer1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.dgvArtists)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -178,6 +228,9 @@
 		private System.Windows.Forms.TabControl tabControl1;
 		private System.Windows.Forms.TabPage tabPage1;
 		private System.Windows.Forms.TabPage tabPage2;
+		private System.Windows.Forms.SplitContainer splitContainer1;
+		private System.Windows.Forms.DataGridView dgvArtists;
+		private System.Windows.Forms.ComboBox cbArtistSort;
 	}
 }
 
