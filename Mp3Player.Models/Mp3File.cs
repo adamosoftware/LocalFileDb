@@ -13,6 +13,8 @@ namespace Mp3Player.Models
 		public string SortArtist { get; set; }
 		public string Album { get; set; }
 		public int? Year { get; set; }
+		public DateTime? LastStarted { get; set; }
+		public DateTime? LastFinished { get; set; }
 
 		public override void GetMetadata(string path)
 		{
