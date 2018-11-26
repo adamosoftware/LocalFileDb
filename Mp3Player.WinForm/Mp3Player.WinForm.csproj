@@ -76,6 +76,7 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\ListViewItemBuilder.cs" />
+    <Compile Include="Classes\AlbumListViewItem.cs" />
     <Compile Include="Models\AllArtistsListViewBuilder.cs" />
     <Compile Include="Models\ComboBoxItem.cs" />
     <Compile Include="Models\FormPosition.cs" />

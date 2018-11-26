@@ -4,6 +4,7 @@ namespace Mp3Player.Models.Queries
 {
 	public class ArtistAlbumsResult
 	{
+		public string Artist { get; set; }
 		public string Album { get; set; }
 		public int? SongCount { get; set; }
 		public int? Year { get; set; }
@@ -13,6 +14,7 @@ namespace Mp3Player.Models.Queries
 	{
 		public ArtistAlbums() : base(
 			@"SELECT
+				[Artist],
 				[Album],
 				COUNT(1) AS [SongCount],
 				MAX([Year]) AS [Year]
@@ -22,6 +24,7 @@ namespace Mp3Player.Models.Queries
 				[Artist]=@artist AND
 				LEN([Album]) > 0
 			GROUP BY
+				[Artist],				
 				[Album]
 			ORDER BY
 				[Album]")

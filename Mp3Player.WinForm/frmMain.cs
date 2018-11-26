@@ -2,6 +2,7 @@
 using LocalFileDb.Library;
 using Mp3Player.Models;
 using Mp3Player.Models.Queries;
+using Mp3Player.WinForm.Classes;
 using Mp3Player.WinForm.Controls;
 using Mp3Player.WinForm.Models;
 using System;
@@ -198,7 +199,8 @@ namespace Mp3Player.WinForm
 						{
 							var data = await new ArtistMp3Files() { Artist = artistInfo.Artist }.ExecuteAsync(cn);
 							FillPlayDropdowns(data);
-							dgvSearchResults.DataSource = data;
+							dgvSearchResults.DataSource = data;							
+							FillAlbumListView(data);
 						});
 					}
 				}				
@@ -206,6 +208,41 @@ namespace Mp3Player.WinForm
 			catch (Exception exc)
 			{
 				MessageBox.Show(exc.Message);
+			}
+		}
+
+		private void FillAlbumListView(IEnumerable<Mp3File> mp3Files)
+		{
+			lvAlbums.Items.Clear();
+
+			var albums = mp3Files.Where(row => !string.IsNullOrEmpty(row.Album))
+				.GroupBy(row => new { row.Artist, row.Album })
+				.OrderBy(item => item.Key.Album).ToArray();			
+
+			if (albums.Count() == 1)
+			{
+				splitContainer1.Panel1Collapsed = true;
+				return;
+			}				
+			else
+			{
+				splitContainer1.Panel1Collapsed = false;
+			}
+
+			foreach (var albumGrp in albums)
+			{
+				var item = new AlbumListViewItem(albumGrp.Key.Artist, albumGrp.Key.Album, albumGrp);
+				lvAlbums.Items.Add(item);
+			}
+
+			var artists = mp3Files
+				.Where(row => !string.IsNullOrEmpty(row.Artist))
+				.GroupBy(row => row.Artist.ToLower())
+				.Select(grp => grp.Key).ToArray();
+			if (artists.Length == 1)
+			{
+				var showAll = new AlbumListViewItem(artists[0], "[ show all ]", mp3Files);
+				lvAlbums.Items.Add(showAll);
 			}
 		}
 
@@ -240,6 +277,7 @@ namespace Mp3Player.WinForm
 					if (results.Any())
 					{						
 						dgvSearchResults.DataSource = results;
+						FillAlbumListView(results);
 					}
 					else
 					{						
@@ -270,6 +308,12 @@ namespace Mp3Player.WinForm
 				btnSearch_Click(sender, e);
 				e.Handled = true;
 			}
+		}
+
+		private void lvAlbums_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+		{
+			var files = (e.Item as AlbumListViewItem)?.Files.ToArray();
+			if (files != null) dgvSearchResults.DataSource = files;
 		}
 	}
 }

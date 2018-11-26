@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.tslRootPath = new System.Windows.Forms.ToolStripStatusLabel();
@@ -61,6 +61,11 @@
 			this.btnSearch = new System.Windows.Forms.ToolStripButton();
 			this.btnPlayArtist = new System.Windows.Forms.ToolStripDropDownButton();
 			this.btnPlayAlbum = new System.Windows.Forms.ToolStripDropDownButton();
+			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+			this.lvAlbums = new System.Windows.Forms.ListView();
+			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.statusStrip1.SuspendLayout();
 			this.cmStatusBar.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splcArtistsPlaylists)).BeginInit();
@@ -73,6 +78,10 @@
 			this.toolStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvSearchResults)).BeginInit();
 			this.toolStrip2.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+			this.splitContainer1.Panel1.SuspendLayout();
+			this.splitContainer1.Panel2.SuspendLayout();
+			this.splitContainer1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// statusStrip1
@@ -200,7 +209,7 @@
 			// 
 			// splcArtistAlbums.Panel2
 			// 
-			this.splcArtistAlbums.Panel2.Controls.Add(this.dgvSearchResults);
+			this.splcArtistAlbums.Panel2.Controls.Add(this.splitContainer1);
 			this.splcArtistAlbums.Panel2.Controls.Add(this.toolStrip2);
 			this.splcArtistAlbums.Size = new System.Drawing.Size(461, 381);
 			this.splcArtistAlbums.SplitterDistance = 189;
@@ -247,8 +256,8 @@
 			this.dgvSearchResults.AllowUserToAddRows = false;
 			this.dgvSearchResults.AllowUserToDeleteRows = false;
 			this.dgvSearchResults.AllowUserToResizeRows = false;
-			dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			this.dgvSearchResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.dgvSearchResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
 			this.dgvSearchResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvSearchResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colTrackNumber,
@@ -258,12 +267,12 @@
             this.colPath,
             this.colYear});
 			this.dgvSearchResults.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dgvSearchResults.Location = new System.Drawing.Point(0, 25);
+			this.dgvSearchResults.Location = new System.Drawing.Point(0, 0);
 			this.dgvSearchResults.Name = "dgvSearchResults";
 			this.dgvSearchResults.ReadOnly = true;
 			this.dgvSearchResults.RowHeadersVisible = false;
 			this.dgvSearchResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvSearchResults.Size = new System.Drawing.Size(461, 163);
+			this.dgvSearchResults.Size = new System.Drawing.Size(461, 91);
 			this.dgvSearchResults.TabIndex = 0;
 			// 
 			// colTrackNumber
@@ -363,6 +372,53 @@
 			this.btnPlayAlbum.Size = new System.Drawing.Size(81, 22);
 			this.btnPlayAlbum.Text = "Play Album";
 			// 
+			// splitContainer1
+			// 
+			this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+			this.splitContainer1.Location = new System.Drawing.Point(0, 25);
+			this.splitContainer1.Name = "splitContainer1";
+			this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+			// 
+			// splitContainer1.Panel1
+			// 
+			this.splitContainer1.Panel1.Controls.Add(this.lvAlbums);
+			// 
+			// splitContainer1.Panel2
+			// 
+			this.splitContainer1.Panel2.Controls.Add(this.dgvSearchResults);
+			this.splitContainer1.Size = new System.Drawing.Size(461, 163);
+			this.splitContainer1.SplitterDistance = 68;
+			this.splitContainer1.TabIndex = 2;
+			// 
+			// lvAlbums
+			// 
+			this.lvAlbums.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
+			this.lvAlbums.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lvAlbums.Location = new System.Drawing.Point(0, 0);
+			this.lvAlbums.Name = "lvAlbums";
+			this.lvAlbums.Size = new System.Drawing.Size(461, 68);
+			this.lvAlbums.TabIndex = 0;
+			this.lvAlbums.TileSize = new System.Drawing.Size(228, 45);
+			this.lvAlbums.UseCompatibleStateImageBehavior = false;
+			this.lvAlbums.View = System.Windows.Forms.View.Tile;
+			this.lvAlbums.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvAlbums_ItemSelectionChanged);
+			// 
+			// columnHeader4
+			// 
+			this.columnHeader4.Text = "Name";
+			// 
+			// columnHeader5
+			// 
+			this.columnHeader5.Text = "Artist";
+			// 
+			// columnHeader6
+			// 
+			this.columnHeader6.Text = "Song Count";
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -395,6 +451,10 @@
 			((System.ComponentModel.ISupportInitialize)(this.dgvSearchResults)).EndInit();
 			this.toolStrip2.ResumeLayout(false);
 			this.toolStrip2.PerformLayout();
+			this.splitContainer1.Panel1.ResumeLayout(false);
+			this.splitContainer1.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+			this.splitContainer1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -431,6 +491,11 @@
 		private System.Windows.Forms.ToolStripButton btnSearch;
 		private System.Windows.Forms.ToolStripDropDownButton btnPlayArtist;
 		private System.Windows.Forms.ToolStripDropDownButton btnPlayAlbum;
+		private System.Windows.Forms.SplitContainer splitContainer1;
+		private System.Windows.Forms.ListView lvAlbums;
+		private System.Windows.Forms.ColumnHeader columnHeader4;
+		private System.Windows.Forms.ColumnHeader columnHeader5;
+		private System.Windows.Forms.ColumnHeader columnHeader6;
 	}
 }
 
