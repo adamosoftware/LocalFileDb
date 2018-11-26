@@ -23,6 +23,7 @@ namespace Mp3Player.WinForm
 		public frmMain()
 		{
 			InitializeComponent();
+			dgvSearchResults.AutoGenerateColumns = false;
 		}
 
 		private IDbConnection GetConnection()
@@ -74,25 +75,22 @@ namespace Mp3Player.WinForm
 		private async Task LoadLibraryAsync(Search search = null)
 		{
 			lvLibrary.Items.Clear();
-			using (var cn = GetConnection())
+
+			await RunQuery(async (cn) =>
 			{
 				var sort = ((cbSort.SelectedItem as ComboBoxItem<AllArtistsSortOptions>)?.Value ?? AllArtistsSortOptions.ArtistName);
 				var allArtistsQry = new AllArtists(sort);
 				if (!string.IsNullOrEmpty(search?.ArtistStartsWith)) allArtistsQry.ArtistStartsWith = search.ArtistStartsWith;
-				tslStatus.Text = "Querying...";
 				var allArtists = await allArtistsQry.ExecuteAsync(cn);
-				tslStatus.Text = "Ready";
-
 				var items = new AllArtistsListViewBuilder();
-				lvLibrary.Items.AddRange(items.GetListViewItems(allArtists, lvLibrary.Groups["AllArtists"]));
+				lvLibrary.Items.AddRange(items.GetListViewItems(allArtists));
 
 				if (_letterGroups == null)
 				{
 					_letterGroups = allArtists.GroupBy(row => row.GetLetterGroup()).Select(grp => grp.Key).OrderBy(item => item).ToArray();
 				}
-				alphaFilterStatusStrip1.Load(_letterGroups, search?.ArtistStartsWith);				
-				
-			}
+				alphaFilterStatusStrip1.Load(_letterGroups, search?.ArtistStartsWith);
+			});
 		}
 
 		private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -175,12 +173,71 @@ namespace Mp3Player.WinForm
 			await LoadLibraryAsync();
 		}
 
-		private void cbSort_SelectedIndexChanged(object sender, EventArgs e)
+		private async void cbSort_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (cbSort.SelectedItem != null)
 			{
 				_settings.Sort = (cbSort.SelectedItem as ComboBoxItem<AllArtistsSortOptions>).Value;
+				await LoadLibraryAsync();
 			}			
+		}
+
+		private async void lvLibrary_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+		{
+			try
+			{
+				if (e.IsSelected)
+				{
+					var artistInfo = (e.Item as ArtistListViewItem)?.ArtistInfo;
+					if (artistInfo != null)
+					{
+						await RunQuery(async (cn) =>
+						{
+							var data = await new ArtistMp3Files() { Artist = artistInfo.Artist }.ExecuteAsync(cn);
+							dgvSearchResults.DataSource = data;
+						});
+					}
+				}				
+			}
+			catch (Exception exc)
+			{
+				MessageBox.Show(exc.Message);
+			}
+		}
+
+		private async void btnSearch_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				await RunQuery(async (cn) =>
+				{
+					var results = await new SearchMp3Files() { Search = tbSearch.Text }.ExecuteAsync(cn);
+					if (results.Any())
+					{
+						splcArtistAlbums.Panel1Collapsed = true;
+						dgvSearchResults.DataSource = results;
+					}
+					else
+					{
+						splcArtistAlbums.Panel1Collapsed = false;
+						MessageBox.Show("No results found.");
+					}
+				});
+			}
+			catch (Exception exc)
+			{
+				MessageBox.Show(exc.Message);
+			}
+		}
+
+		private async Task RunQuery(Func<IDbConnection, Task> queryAction)
+		{
+			using (var cn = GetConnection())
+			{
+				tslStatus.Text = "Querying...";
+				await queryAction.Invoke(cn);
+				tslStatus.Text = "Ready";
+			}
 		}
 	}
 }

@@ -47,6 +47,8 @@
     <Compile Include="PlaylistFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\AllArtists.cs" />
+    <Compile Include="Queries\ArtistMp3Files.cs" />
+    <Compile Include="Queries\SearchMp3Files.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LocalFileDb.Library\LocalFileDb.Library.csproj">
