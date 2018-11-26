@@ -213,13 +213,11 @@ namespace Mp3Player.WinForm
 				{
 					var results = await new SearchMp3Files() { Search = tbSearch.Text }.ExecuteAsync(cn);
 					if (results.Any())
-					{
-						splcArtistAlbums.Panel1Collapsed = true;
+					{						
 						dgvSearchResults.DataSource = results;
 					}
 					else
-					{
-						splcArtistAlbums.Panel1Collapsed = false;
+					{						
 						MessageBox.Show("No results found.");
 					}
 				});

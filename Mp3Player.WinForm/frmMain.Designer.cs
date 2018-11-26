@@ -29,13 +29,8 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-			this.tbSearch = new System.Windows.Forms.ToolStripTextBox();
-			this.btnPlayPause = new System.Windows.Forms.ToolStripButton();
-			this.cbSort = new System.Windows.Forms.ToolStripComboBox();
-			this.btnSearch = new System.Windows.Forms.ToolStripButton();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.tslRootPath = new System.Windows.Forms.ToolStripStatusLabel();
 			this.tslStatus = new System.Windows.Forms.ToolStripStatusLabel();
@@ -51,7 +46,6 @@
 			this.splcArtistsPlaylists = new System.Windows.Forms.SplitContainer();
 			this.splcArtistAlbums = new System.Windows.Forms.SplitContainer();
 			this.alphaFilterStatusStrip1 = new Mp3Player.WinForm.Controls.AlphaFilterStatusStrip();
-			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
 			this.dgvSearchResults = new System.Windows.Forms.DataGridView();
 			this.colTrackNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,7 +53,12 @@
 			this.colAlbum = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.toolStrip1.SuspendLayout();
+			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+			this.cbSort = new System.Windows.Forms.ToolStripComboBox();
+			this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+			this.tbSearch = new System.Windows.Forms.ToolStripTextBox();
+			this.btnSearch = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip1.SuspendLayout();
 			this.cmStatusBar.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splcArtistsPlaylists)).BeginInit();
@@ -70,52 +69,9 @@
 			this.splcArtistAlbums.Panel2.SuspendLayout();
 			this.splcArtistAlbums.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvSearchResults)).BeginInit();
+			this.toolStrip1.SuspendLayout();
+			this.toolStrip2.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// toolStrip1
-			// 
-			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel1,
-            this.cbSort,
-            this.tbSearch,
-            this.btnPlayPause,
-            this.btnSearch});
-			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-			this.toolStrip1.Name = "toolStrip1";
-			this.toolStrip1.Size = new System.Drawing.Size(702, 25);
-			this.toolStrip1.TabIndex = 0;
-			this.toolStrip1.Text = "toolStrip1";
-			// 
-			// tbSearch
-			// 
-			this.tbSearch.Name = "tbSearch";
-			this.tbSearch.Size = new System.Drawing.Size(150, 25);
-			// 
-			// btnPlayPause
-			// 
-			this.btnPlayPause.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-			this.btnPlayPause.Image = ((System.Drawing.Image)(resources.GetObject("btnPlayPause.Image")));
-			this.btnPlayPause.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnPlayPause.Name = "btnPlayPause";
-			this.btnPlayPause.Size = new System.Drawing.Size(49, 22);
-			this.btnPlayPause.Text = "Play";
-			// 
-			// cbSort
-			// 
-			this.cbSort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cbSort.Name = "cbSort";
-			this.cbSort.Size = new System.Drawing.Size(121, 25);
-			this.cbSort.SelectedIndexChanged += new System.EventHandler(this.cbSort_SelectedIndexChanged);
-			// 
-			// btnSearch
-			// 
-			this.btnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
-			this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnSearch.Name = "btnSearch";
-			this.btnSearch.Size = new System.Drawing.Size(46, 22);
-			this.btnSearch.Text = "Search";
-			this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
 			// 
 			// statusStrip1
 			// 
@@ -161,10 +117,10 @@
             this.columnHeader3});
 			this.lvLibrary.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.lvLibrary.HideSelection = false;
-			this.lvLibrary.Location = new System.Drawing.Point(0, 0);
+			this.lvLibrary.Location = new System.Drawing.Point(0, 25);
 			this.lvLibrary.MultiSelect = false;
 			this.lvLibrary.Name = "lvLibrary";
-			this.lvLibrary.Size = new System.Drawing.Size(461, 173);
+			this.lvLibrary.Size = new System.Drawing.Size(461, 142);
 			this.lvLibrary.TabIndex = 0;
 			this.lvLibrary.TileSize = new System.Drawing.Size(228, 45);
 			this.lvLibrary.UseCompatibleStateImageBehavior = false;
@@ -217,13 +173,13 @@
 			// 
 			this.splcArtistsPlaylists.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.splcArtistsPlaylists.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-			this.splcArtistsPlaylists.Location = new System.Drawing.Point(0, 25);
+			this.splcArtistsPlaylists.Location = new System.Drawing.Point(0, 0);
 			this.splcArtistsPlaylists.Name = "splcArtistsPlaylists";
 			// 
 			// splcArtistsPlaylists.Panel1
 			// 
 			this.splcArtistsPlaylists.Panel1.Controls.Add(this.splcArtistAlbums);
-			this.splcArtistsPlaylists.Size = new System.Drawing.Size(702, 356);
+			this.splcArtistsPlaylists.Size = new System.Drawing.Size(702, 381);
 			this.splcArtistsPlaylists.SplitterDistance = 461;
 			this.splcArtistsPlaylists.TabIndex = 2;
 			// 
@@ -237,19 +193,21 @@
 			// splcArtistAlbums.Panel1
 			// 
 			this.splcArtistAlbums.Panel1.Controls.Add(this.lvLibrary);
+			this.splcArtistAlbums.Panel1.Controls.Add(this.toolStrip1);
 			this.splcArtistAlbums.Panel1.Controls.Add(this.alphaFilterStatusStrip1);
 			// 
 			// splcArtistAlbums.Panel2
 			// 
 			this.splcArtistAlbums.Panel2.Controls.Add(this.dgvSearchResults);
-			this.splcArtistAlbums.Size = new System.Drawing.Size(461, 356);
-			this.splcArtistAlbums.SplitterDistance = 195;
+			this.splcArtistAlbums.Panel2.Controls.Add(this.toolStrip2);
+			this.splcArtistAlbums.Size = new System.Drawing.Size(461, 381);
+			this.splcArtistAlbums.SplitterDistance = 189;
 			this.splcArtistAlbums.TabIndex = 1;
 			// 
 			// alphaFilterStatusStrip1
 			// 
 			this.alphaFilterStatusStrip1.IsFiltered = false;
-			this.alphaFilterStatusStrip1.Location = new System.Drawing.Point(0, 173);
+			this.alphaFilterStatusStrip1.Location = new System.Drawing.Point(0, 167);
 			this.alphaFilterStatusStrip1.Name = "alphaFilterStatusStrip1";
 			this.alphaFilterStatusStrip1.Size = new System.Drawing.Size(461, 22);
 			this.alphaFilterStatusStrip1.SizingGrip = false;
@@ -257,12 +215,6 @@
 			this.alphaFilterStatusStrip1.Text = "alphaFilterStatusStrip1";
 			this.alphaFilterStatusStrip1.LetterClicked += new System.EventHandler(this.alphaFilterStatusStrip1_LetterClicked);
 			this.alphaFilterStatusStrip1.ShowAllClicked += new System.EventHandler(this.alphaFilterStatusStrip1_ShowAllClicked);
-			// 
-			// toolStripLabel1
-			// 
-			this.toolStripLabel1.Name = "toolStripLabel1";
-			this.toolStripLabel1.Size = new System.Drawing.Size(65, 22);
-			this.toolStripLabel1.Text = "Sort artists:";
 			// 
 			// dgvSearchResults
 			// 
@@ -280,12 +232,12 @@
             this.colPath,
             this.colYear});
 			this.dgvSearchResults.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dgvSearchResults.Location = new System.Drawing.Point(0, 0);
+			this.dgvSearchResults.Location = new System.Drawing.Point(0, 25);
 			this.dgvSearchResults.Name = "dgvSearchResults";
 			this.dgvSearchResults.ReadOnly = true;
 			this.dgvSearchResults.RowHeadersVisible = false;
 			this.dgvSearchResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvSearchResults.Size = new System.Drawing.Size(461, 157);
+			this.dgvSearchResults.Size = new System.Drawing.Size(461, 163);
 			this.dgvSearchResults.TabIndex = 0;
 			// 
 			// colTrackNumber
@@ -338,6 +290,56 @@
 			this.colYear.ReadOnly = true;
 			this.colYear.Width = 57;
 			// 
+			// toolStrip1
+			// 
+			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel1,
+            this.cbSort});
+			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+			this.toolStrip1.Name = "toolStrip1";
+			this.toolStrip1.Size = new System.Drawing.Size(461, 25);
+			this.toolStrip1.TabIndex = 2;
+			this.toolStrip1.Text = "toolStrip1";
+			// 
+			// toolStripLabel1
+			// 
+			this.toolStripLabel1.Name = "toolStripLabel1";
+			this.toolStripLabel1.Size = new System.Drawing.Size(65, 22);
+			this.toolStripLabel1.Text = "Sort artists:";
+			// 
+			// cbSort
+			// 
+			this.cbSort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cbSort.Name = "cbSort";
+			this.cbSort.Size = new System.Drawing.Size(121, 25);
+			this.cbSort.SelectedIndexChanged += new System.EventHandler(this.cbSort_SelectedIndexChanged);
+			// 
+			// toolStrip2
+			// 
+			this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tbSearch,
+            this.btnSearch});
+			this.toolStrip2.Location = new System.Drawing.Point(0, 0);
+			this.toolStrip2.Name = "toolStrip2";
+			this.toolStrip2.Size = new System.Drawing.Size(461, 25);
+			this.toolStrip2.TabIndex = 1;
+			this.toolStrip2.Text = "toolStrip2";
+			// 
+			// tbSearch
+			// 
+			this.tbSearch.Name = "tbSearch";
+			this.tbSearch.Size = new System.Drawing.Size(150, 25);
+			// 
+			// btnSearch
+			// 
+			this.btnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
+			this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnSearch.Name = "btnSearch";
+			this.btnSearch.Size = new System.Drawing.Size(46, 22);
+			this.btnSearch.Text = "Search";
+			this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -345,7 +347,6 @@
 			this.ClientSize = new System.Drawing.Size(702, 403);
 			this.Controls.Add(this.splcArtistsPlaylists);
 			this.Controls.Add(this.statusStrip1);
-			this.Controls.Add(this.toolStrip1);
 			this.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.KeyPreview = true;
 			this.Name = "frmMain";
@@ -354,8 +355,6 @@
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
 			this.Load += new System.EventHandler(this.frmMain_Load);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmMain_KeyDown);
-			this.toolStrip1.ResumeLayout(false);
-			this.toolStrip1.PerformLayout();
 			this.statusStrip1.ResumeLayout(false);
 			this.statusStrip1.PerformLayout();
 			this.cmStatusBar.ResumeLayout(false);
@@ -365,23 +364,24 @@
 			this.splcArtistAlbums.Panel1.ResumeLayout(false);
 			this.splcArtistAlbums.Panel1.PerformLayout();
 			this.splcArtistAlbums.Panel2.ResumeLayout(false);
+			this.splcArtistAlbums.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splcArtistAlbums)).EndInit();
 			this.splcArtistAlbums.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dgvSearchResults)).EndInit();
+			this.toolStrip1.ResumeLayout(false);
+			this.toolStrip1.PerformLayout();
+			this.toolStrip2.ResumeLayout(false);
+			this.toolStrip2.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
 		}
 
 		#endregion
-
-		private System.Windows.Forms.ToolStrip toolStrip1;
 		private System.Windows.Forms.StatusStrip statusStrip1;
 		private System.Windows.Forms.ToolStripStatusLabel tslRootPath;
-		private System.Windows.Forms.ToolStripTextBox tbSearch;
 		private System.Windows.Forms.ToolStripStatusLabel tslStatus;
 		private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
-		private System.Windows.Forms.ToolStripButton btnPlayPause;
 		private System.Windows.Forms.ListView lvLibrary;
 		private System.Windows.Forms.ContextMenuStrip cmStatusBar;
 		private System.Windows.Forms.ToolStripMenuItem selectToolStripMenuItem;
@@ -390,12 +390,9 @@
 		private System.Windows.Forms.ColumnHeader columnHeader1;
 		private System.Windows.Forms.ColumnHeader columnHeader2;
 		private System.Windows.Forms.ColumnHeader columnHeader3;
-		private System.Windows.Forms.ToolStripButton btnSearch;
 		private System.Windows.Forms.SplitContainer splcArtistsPlaylists;
 		private System.Windows.Forms.SplitContainer splcArtistAlbums;
 		private Controls.AlphaFilterStatusStrip alphaFilterStatusStrip1;
-		private System.Windows.Forms.ToolStripComboBox cbSort;
-		private System.Windows.Forms.ToolStripLabel toolStripLabel1;
 		private System.Windows.Forms.DataGridView dgvSearchResults;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colTrackNumber;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colTitle;
@@ -403,6 +400,12 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn colAlbum;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colPath;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colYear;
+		private System.Windows.Forms.ToolStrip toolStrip1;
+		private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+		private System.Windows.Forms.ToolStripComboBox cbSort;
+		private System.Windows.Forms.ToolStrip toolStrip2;
+		private System.Windows.Forms.ToolStripTextBox tbSearch;
+		private System.Windows.Forms.ToolStripButton btnSearch;
 	}
 }
 
