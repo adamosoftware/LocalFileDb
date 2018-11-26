@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.tslRootPath = new System.Windows.Forms.ToolStripStatusLabel();
@@ -48,6 +48,7 @@
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
 			this.cbSort = new System.Windows.Forms.ToolStripComboBox();
+			this.alphaFilterStatusStrip1 = new Mp3Player.WinForm.Controls.AlphaFilterStatusStrip();
 			this.dgvSearchResults = new System.Windows.Forms.DataGridView();
 			this.colTrackNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,7 +59,6 @@
 			this.toolStrip2 = new System.Windows.Forms.ToolStrip();
 			this.tbSearch = new System.Windows.Forms.ToolStripTextBox();
 			this.btnSearch = new System.Windows.Forms.ToolStripButton();
-			this.alphaFilterStatusStrip1 = new Mp3Player.WinForm.Controls.AlphaFilterStatusStrip();
 			this.btnPlayArtist = new System.Windows.Forms.ToolStripDropDownButton();
 			this.btnPlayAlbum = new System.Windows.Forms.ToolStripDropDownButton();
 			this.statusStrip1.SuspendLayout();
@@ -230,13 +230,25 @@
 			this.cbSort.Size = new System.Drawing.Size(121, 25);
 			this.cbSort.SelectedIndexChanged += new System.EventHandler(this.cbSort_SelectedIndexChanged);
 			// 
+			// alphaFilterStatusStrip1
+			// 
+			this.alphaFilterStatusStrip1.IsFiltered = false;
+			this.alphaFilterStatusStrip1.Location = new System.Drawing.Point(0, 167);
+			this.alphaFilterStatusStrip1.Name = "alphaFilterStatusStrip1";
+			this.alphaFilterStatusStrip1.Size = new System.Drawing.Size(461, 22);
+			this.alphaFilterStatusStrip1.SizingGrip = false;
+			this.alphaFilterStatusStrip1.TabIndex = 1;
+			this.alphaFilterStatusStrip1.Text = "alphaFilterStatusStrip1";
+			this.alphaFilterStatusStrip1.LetterClicked += new System.EventHandler(this.alphaFilterStatusStrip1_LetterClicked);
+			this.alphaFilterStatusStrip1.ShowAllClicked += new System.EventHandler(this.alphaFilterStatusStrip1_ShowAllClicked);
+			// 
 			// dgvSearchResults
 			// 
 			this.dgvSearchResults.AllowUserToAddRows = false;
 			this.dgvSearchResults.AllowUserToDeleteRows = false;
 			this.dgvSearchResults.AllowUserToResizeRows = false;
-			dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			this.dgvSearchResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.dgvSearchResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
 			this.dgvSearchResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvSearchResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colTrackNumber,
@@ -332,18 +344,6 @@
 			this.btnSearch.Size = new System.Drawing.Size(46, 22);
 			this.btnSearch.Text = "Search";
 			this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-			// 
-			// alphaFilterStatusStrip1
-			// 
-			this.alphaFilterStatusStrip1.IsFiltered = false;
-			this.alphaFilterStatusStrip1.Location = new System.Drawing.Point(0, 167);
-			this.alphaFilterStatusStrip1.Name = "alphaFilterStatusStrip1";
-			this.alphaFilterStatusStrip1.Size = new System.Drawing.Size(461, 22);
-			this.alphaFilterStatusStrip1.SizingGrip = false;
-			this.alphaFilterStatusStrip1.TabIndex = 1;
-			this.alphaFilterStatusStrip1.Text = "alphaFilterStatusStrip1";
-			this.alphaFilterStatusStrip1.LetterClicked += new System.EventHandler(this.alphaFilterStatusStrip1_LetterClicked);
-			this.alphaFilterStatusStrip1.ShowAllClicked += new System.EventHandler(this.alphaFilterStatusStrip1_ShowAllClicked);
 			// 
 			// btnPlayArtist
 			// 
