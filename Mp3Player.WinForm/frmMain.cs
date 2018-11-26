@@ -69,7 +69,7 @@ namespace Mp3Player.WinForm
 				{
 					_letterGroups = allArtists.GroupBy(row => row.GetLetterGroup()).Select(grp => grp.Key).ToArray();
 				}
-				alphaFilterStatusStrip1.Load(_letterGroups);
+				alphaFilterStatusStrip1.Load(_letterGroups, search?.ArtistStartsWith);
 				//foreach (var item in allArtists) allArtistsGrp.Items.AddRange()
 				
 			}
@@ -146,6 +146,11 @@ namespace Mp3Player.WinForm
 				tbSearch.Focus();
 				e.Handled = true;
 			}
+		}
+
+		private async void alphaFilterStatusStrip1_ShowAllClicked(object sender, EventArgs e)
+		{
+			await LoadLibraryAsync();
 		}
 	}
 }
