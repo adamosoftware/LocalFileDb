@@ -16,7 +16,8 @@ namespace Mp3Player.WinForm
 {
 	public partial class frmMain : Form
 	{
-		private Settings _settings;		
+		private Settings _settings;
+		private string[] _letterGroups = null;
 
 		public frmMain()
 		{
@@ -52,23 +53,26 @@ namespace Mp3Player.WinForm
 			}
 		}
 
-		private async Task LoadLibraryAsync()
+		private async Task LoadLibraryAsync(Search search = null)
 		{
+			lvLibrary.Items.Clear();
 			using (var cn = GetConnection())
 			{
-				var allArtistsGrp = new ListViewGroup("All Artists") { Name = "AllArtists" };
-				lvLibrary.Groups.Add(allArtistsGrp);				
-				
-				var allArtists = await new AllArtists().ExecuteAsync(cn);
-				var items = new AllArtistsListViewBuilder();
-				lvLibrary.Items.AddRange(items.GetListViewItems(allArtists, allArtistsGrp));
+				var allArtistsQry = new AllArtists();
+				if (!string.IsNullOrEmpty(search?.ArtistStartsWith)) allArtistsQry.ArtistStartsWith = search.ArtistStartsWith;
+				var allArtists = await allArtistsQry.ExecuteAsync(cn);
 
-				alphaFilterStatusStrip1.Load(allArtists.GroupBy(row => row.GetLetterGroup()).Select(grp => grp.Key).ToArray());
+				var items = new AllArtistsListViewBuilder();
+				lvLibrary.Items.AddRange(items.GetListViewItems(allArtists, lvLibrary.Groups["AllArtists"]));
+
+				if (_letterGroups == null)
+				{
+					_letterGroups = allArtists.GroupBy(row => row.GetLetterGroup()).Select(grp => grp.Key).ToArray();
+				}
+				alphaFilterStatusStrip1.Load(_letterGroups);
 				//foreach (var item in allArtists) allArtistsGrp.Items.AddRange()
 				
 			}
-
-
 		}
 
 		private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -127,6 +131,21 @@ namespace Mp3Player.WinForm
 		private void UpdateProgress(SyncProgress obj)
 		{
 			tslStatus.Text = obj.Message;
+		}
+
+		private async void alphaFilterStatusStrip1_LetterClicked(object sender, EventArgs e)
+		{
+			var label = sender as ToolStripStatusLabel;
+			await LoadLibraryAsync(new Search() { ArtistStartsWith = label.Text });
+		}
+
+		private void frmMain_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.F3)
+			{
+				tbSearch.Focus();
+				e.Handled = true;
+			}
 		}
 	}
 }

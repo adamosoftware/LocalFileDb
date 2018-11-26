@@ -30,9 +30,9 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+			System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("All Artists", System.Windows.Forms.HorizontalAlignment.Left);
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-			this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+			this.tbSearch = new System.Windows.Forms.ToolStripTextBox();
 			this.btnPlayPause = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.tslRootPath = new System.Windows.Forms.ToolStripStatusLabel();
@@ -47,6 +47,10 @@
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.alphaFilterStatusStrip1 = new Mp3Player.WinForm.Controls.AlphaFilterStatusStrip();
+			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.btnSearch = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
@@ -57,25 +61,19 @@
 			// toolStrip1
 			// 
 			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel1,
-            this.toolStripTextBox1,
-            this.btnPlayPause});
+            this.tbSearch,
+            this.btnPlayPause,
+            this.btnSearch});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip1.Name = "toolStrip1";
 			this.toolStrip1.Size = new System.Drawing.Size(607, 25);
 			this.toolStrip1.TabIndex = 0;
 			this.toolStrip1.Text = "toolStrip1";
 			// 
-			// toolStripLabel1
+			// tbSearch
 			// 
-			this.toolStripLabel1.Name = "toolStripLabel1";
-			this.toolStripLabel1.Size = new System.Drawing.Size(45, 22);
-			this.toolStripLabel1.Text = "Search:";
-			// 
-			// toolStripTextBox1
-			// 
-			this.toolStripTextBox1.Name = "toolStripTextBox1";
-			this.toolStripTextBox1.Size = new System.Drawing.Size(150, 25);
+			this.tbSearch.Name = "tbSearch";
+			this.tbSearch.Size = new System.Drawing.Size(150, 25);
 			// 
 			// btnPlayPause
 			// 
@@ -148,11 +146,20 @@
 			// 
 			// lvLibrary
 			// 
+			this.lvLibrary.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
 			this.lvLibrary.Dock = System.Windows.Forms.DockStyle.Fill;
+			listViewGroup1.Header = "All Artists";
+			listViewGroup1.Name = "AllArtists";
+			this.lvLibrary.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
+            listViewGroup1});
 			this.lvLibrary.Location = new System.Drawing.Point(3, 3);
 			this.lvLibrary.Name = "lvLibrary";
 			this.lvLibrary.Size = new System.Drawing.Size(593, 171);
 			this.lvLibrary.TabIndex = 0;
+			this.lvLibrary.TileSize = new System.Drawing.Size(228, 45);
 			this.lvLibrary.UseCompatibleStateImageBehavior = false;
 			this.lvLibrary.View = System.Windows.Forms.View.Tile;
 			// 
@@ -204,6 +211,28 @@
 			this.alphaFilterStatusStrip1.SizingGrip = false;
 			this.alphaFilterStatusStrip1.TabIndex = 1;
 			this.alphaFilterStatusStrip1.Text = "alphaFilterStatusStrip1";
+			this.alphaFilterStatusStrip1.LetterClicked += new System.EventHandler(this.alphaFilterStatusStrip1_LetterClicked);
+			// 
+			// columnHeader1
+			// 
+			this.columnHeader1.Text = "Name";
+			// 
+			// columnHeader2
+			// 
+			this.columnHeader2.Text = "Albums";
+			// 
+			// columnHeader3
+			// 
+			this.columnHeader3.Text = "Songs";
+			// 
+			// btnSearch
+			// 
+			this.btnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
+			this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnSearch.Name = "btnSearch";
+			this.btnSearch.Size = new System.Drawing.Size(46, 22);
+			this.btnSearch.Text = "Search";
 			// 
 			// frmMain
 			// 
@@ -214,11 +243,13 @@
 			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.toolStrip1);
 			this.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.KeyPreview = true;
 			this.Name = "frmMain";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Ao Mp3 Player";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
 			this.Load += new System.EventHandler(this.frmMain_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmMain_KeyDown);
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();
 			this.statusStrip1.ResumeLayout(false);
@@ -237,8 +268,7 @@
 		private System.Windows.Forms.ToolStrip toolStrip1;
 		private System.Windows.Forms.StatusStrip statusStrip1;
 		private System.Windows.Forms.ToolStripStatusLabel tslRootPath;
-		private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
-		private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+		private System.Windows.Forms.ToolStripTextBox tbSearch;
 		private System.Windows.Forms.ToolStripStatusLabel tslStatus;
 		private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
 		private System.Windows.Forms.ToolStripButton btnPlayPause;
@@ -251,6 +281,10 @@
 		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
 		private Controls.AlphaFilterStatusStrip alphaFilterStatusStrip1;
+		private System.Windows.Forms.ColumnHeader columnHeader1;
+		private System.Windows.Forms.ColumnHeader columnHeader2;
+		private System.Windows.Forms.ColumnHeader columnHeader3;
+		private System.Windows.Forms.ToolStripButton btnSearch;
 	}
 }
 

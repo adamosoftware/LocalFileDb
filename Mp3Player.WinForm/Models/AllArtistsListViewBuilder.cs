@@ -10,7 +10,7 @@ namespace Mp3Player.WinForm.Models
 		{
 			var result = new ListViewItem() { Text = item.Artist };
 			if (group != null) result.Group = group;
-			result.SubItems.Add($"{item.AlbumCount} albums | {item.SongCount} songs");			
+			result.SubItems.AddRange(new string[] { $"{item.AlbumCount} albums", $"{item.SongCount} songs" });
 			return result;
 		}
 	}

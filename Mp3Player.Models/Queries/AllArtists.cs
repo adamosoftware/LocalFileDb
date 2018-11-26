@@ -1,4 +1,5 @@
 ﻿using Postulate.Lite.Core;
+using Postulate.Lite.Core.Attributes;
 
 namespace Mp3Player.Models.Queries
 {
@@ -50,7 +51,7 @@ namespace Mp3Player.Models.Queries
 				[dbo].[Mp3File] [f]
 				LEFT JOIN [albumCounts] [c] ON [f].[SortArtist]=[c].[SortArtist]
 			WHERE
-				LEN([f].[SortArtist])>0
+				LEN([f].[SortArtist])>0 {andWhere}
 			GROUP BY
 				[Artist],
 				[f].[SortArtist],
@@ -59,5 +60,8 @@ namespace Mp3Player.Models.Queries
 				[f].[SortArtist]")
 		{
 		}
+
+		[Where("[f].[SortArtist] LIKE @artistStartsWith + '%'")]
+		public string ArtistStartsWith { get; set; }
 	}
 }

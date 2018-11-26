@@ -75,6 +75,7 @@
     <Compile Include="Classes\ListViewItemBuilder.cs" />
     <Compile Include="Models\AllArtistsListViewBuilder.cs" />
     <Compile Include="Models\FormPosition.cs" />
+    <Compile Include="Models\Search.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
