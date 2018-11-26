@@ -2,8 +2,10 @@
 using LocalFileDb.Library;
 using Mp3Player.Models;
 using Mp3Player.Models.Queries;
+using Mp3Player.WinForm.Controls;
 using Mp3Player.WinForm.Models;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -186,6 +188,7 @@ namespace Mp3Player.WinForm
 		{
 			try
 			{
+				tbSearch.Text = null;
 				if (e.IsSelected)
 				{
 					var artistInfo = (e.Item as ArtistListViewItem)?.ArtistInfo;
@@ -194,6 +197,7 @@ namespace Mp3Player.WinForm
 						await RunQuery(async (cn) =>
 						{
 							var data = await new ArtistMp3Files() { Artist = artistInfo.Artist }.ExecuteAsync(cn);
+							FillPlayDropdowns(data);
 							dgvSearchResults.DataSource = data;
 						});
 					}
@@ -205,6 +209,26 @@ namespace Mp3Player.WinForm
 			}
 		}
 
+		private void FillPlayDropdowns(IEnumerable<Mp3File> data)
+		{
+			var artists = data.GroupBy(row => row.Artist);
+			if (artists.Count() > 1)
+			{
+				btnPlayArtist.Visible = true;
+				btnPlayArtist.DropDownItems.Clear();
+				foreach (var artistGrp in artists) btnPlayArtist.DropDownItems.Add(new PlayToolStripButton(artistGrp.Key, artistGrp));
+			}
+			else
+			{
+				btnPlayArtist.Visible = false;
+			}
+
+			var albums = data.GroupBy(row => new { row.Artist, row.Album });
+			btnPlayAlbum.Visible = albums.Any();
+			btnPlayAlbum.DropDownItems.Clear();
+			foreach (var albumGrp in albums) btnPlayAlbum.DropDownItems.Add(new PlayToolStripButton($"{albumGrp.Key.Artist} - {albumGrp.Key.Album}", albumGrp));
+		}
+
 		private async void btnSearch_Click(object sender, EventArgs e)
 		{
 			try
@@ -212,6 +236,7 @@ namespace Mp3Player.WinForm
 				await RunQuery(async (cn) =>
 				{
 					var results = await new SearchMp3Files() { Search = tbSearch.Text }.ExecuteAsync(cn);
+					FillPlayDropdowns(results);
 					if (results.Any())
 					{						
 						dgvSearchResults.DataSource = results;
@@ -235,6 +260,15 @@ namespace Mp3Player.WinForm
 				tslStatus.Text = "Querying...";
 				await queryAction.Invoke(cn);
 				tslStatus.Text = "Ready";
+			}
+		}
+
+		private void tbSearch_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter && tbSearch.Text.Length >= 3)
+			{
+				btnSearch_Click(sender, e);
+				e.Handled = true;
 			}
 		}
 	}

@@ -66,6 +66,9 @@
     <Compile Include="Controls\AlphaFilterStatusStrip.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\PlayToolStripButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
