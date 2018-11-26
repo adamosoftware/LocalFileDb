@@ -40,12 +40,13 @@
 			this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
-			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.lvLibrary = new System.Windows.Forms.ListView();
+			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.cmStatusBar = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.alphaFilterStatusStrip1 = new Mp3Player.WinForm.Controls.AlphaFilterStatusStrip();
 			this.toolStrip1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
@@ -103,7 +104,7 @@
 			this.tslRootPath.IsLink = true;
 			this.tslRootPath.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
 			this.tslRootPath.Name = "tslRootPath";
-			this.tslRootPath.Size = new System.Drawing.Size(402, 17);
+			this.tslRootPath.Size = new System.Drawing.Size(535, 17);
 			this.tslRootPath.Spring = true;
 			this.tslRootPath.Text = "(root path)";
 			this.tslRootPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -119,6 +120,7 @@
 			// 
 			this.toolStripProgressBar1.Name = "toolStripProgressBar1";
 			this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
+			this.toolStripProgressBar1.Visible = false;
 			// 
 			// tabControl1
 			// 
@@ -135,6 +137,7 @@
 			// tabPage1
 			// 
 			this.tabPage1.Controls.Add(this.lvLibrary);
+			this.tabPage1.Controls.Add(this.alphaFilterStatusStrip1);
 			this.tabPage1.Location = new System.Drawing.Point(4, 30);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -142,6 +145,16 @@
 			this.tabPage1.TabIndex = 0;
 			this.tabPage1.Text = "Library";
 			this.tabPage1.UseVisualStyleBackColor = true;
+			// 
+			// lvLibrary
+			// 
+			this.lvLibrary.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lvLibrary.Location = new System.Drawing.Point(3, 3);
+			this.lvLibrary.Name = "lvLibrary";
+			this.lvLibrary.Size = new System.Drawing.Size(593, 171);
+			this.lvLibrary.TabIndex = 0;
+			this.lvLibrary.UseCompatibleStateImageBehavior = false;
+			this.lvLibrary.View = System.Windows.Forms.View.Tile;
 			// 
 			// tabPage2
 			// 
@@ -152,16 +165,6 @@
 			this.tabPage2.TabIndex = 1;
 			this.tabPage2.Text = "Now Playing";
 			this.tabPage2.UseVisualStyleBackColor = true;
-			// 
-			// lvLibrary
-			// 
-			this.lvLibrary.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lvLibrary.Location = new System.Drawing.Point(3, 3);
-			this.lvLibrary.Name = "lvLibrary";
-			this.lvLibrary.Size = new System.Drawing.Size(593, 193);
-			this.lvLibrary.TabIndex = 0;
-			this.lvLibrary.UseCompatibleStateImageBehavior = false;
-			this.lvLibrary.View = System.Windows.Forms.View.Tile;
 			// 
 			// cmStatusBar
 			// 
@@ -193,6 +196,15 @@
 			this.refreshToolStripMenuItem.Text = "Update Music";
 			this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
 			// 
+			// alphaFilterStatusStrip1
+			// 
+			this.alphaFilterStatusStrip1.Location = new System.Drawing.Point(3, 174);
+			this.alphaFilterStatusStrip1.Name = "alphaFilterStatusStrip1";
+			this.alphaFilterStatusStrip1.Size = new System.Drawing.Size(593, 22);
+			this.alphaFilterStatusStrip1.SizingGrip = false;
+			this.alphaFilterStatusStrip1.TabIndex = 1;
+			this.alphaFilterStatusStrip1.Text = "alphaFilterStatusStrip1";
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -213,6 +225,7 @@
 			this.statusStrip1.PerformLayout();
 			this.tabControl1.ResumeLayout(false);
 			this.tabPage1.ResumeLayout(false);
+			this.tabPage1.PerformLayout();
 			this.cmStatusBar.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -237,6 +250,7 @@
 		private System.Windows.Forms.ToolStripMenuItem selectToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
+		private Controls.AlphaFilterStatusStrip alphaFilterStatusStrip1;
 	}
 }
 

@@ -1,12 +1,15 @@
 ﻿using JsonSettings;
 using LocalFileDb.Library;
 using Mp3Player.Models;
+using Mp3Player.Models.Queries;
 using Mp3Player.WinForm.Models;
 using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Mp3Player.WinForm
@@ -31,7 +34,7 @@ namespace Mp3Player.WinForm
 			cmStatusBar.Show(statusStrip1, new Point() { X = 0, Y = statusStrip1.Height });
 		}
 
-		private void frmMain_Load(object sender, EventArgs e)
+		private async void frmMain_Load(object sender, EventArgs e)
 		{
 			try
 			{
@@ -39,11 +42,33 @@ namespace Mp3Player.WinForm
 				_settings.FormPosition?.ApplyToForm(this);				
 
 				tslRootPath.Text = _settings.RootFolder;
+				tslStatus.Text = "Ready";
+
+				await LoadLibraryAsync();
 			}
 			catch (Exception exc)
 			{
 				MessageBox.Show(exc.Message);
 			}
+		}
+
+		private async Task LoadLibraryAsync()
+		{
+			using (var cn = GetConnection())
+			{
+				var allArtistsGrp = new ListViewGroup("All Artists") { Name = "AllArtists" };
+				lvLibrary.Groups.Add(allArtistsGrp);				
+				
+				var allArtists = await new AllArtists().ExecuteAsync(cn);
+				var items = new AllArtistsListViewBuilder();
+				lvLibrary.Items.AddRange(items.GetListViewItems(allArtists, allArtistsGrp));
+
+				alphaFilterStatusStrip1.Load(allArtists.GroupBy(row => row.GetLetterGroup()).Select(grp => grp.Key).ToArray());
+				//foreach (var item in allArtists) allArtistsGrp.Items.AddRange()
+				
+			}
+
+
 		}
 
 		private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
