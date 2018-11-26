@@ -1,4 +1,5 @@
 ﻿using JsonSettings;
+using Mp3Player.Models.Queries;
 using System;
 
 namespace Mp3Player.WinForm.Models
@@ -14,6 +15,8 @@ namespace Mp3Player.WinForm.Models
 		public override string Filename => "settings.json";
 
 		public string RootFolder { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+
+		public AllArtistsSortOptions Sort { get; set; }
 
 		public FormPosition FormPosition { get; set; }
 	}

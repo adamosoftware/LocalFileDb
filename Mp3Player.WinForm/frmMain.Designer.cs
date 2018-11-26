@@ -49,6 +49,7 @@
 			this.splcArtistsPlaylists = new System.Windows.Forms.SplitContainer();
 			this.splcArtistAlbums = new System.Windows.Forms.SplitContainer();
 			this.alphaFilterStatusStrip1 = new Mp3Player.WinForm.Controls.AlphaFilterStatusStrip();
+			this.cbSort = new System.Windows.Forms.ToolStripComboBox();
 			this.toolStrip1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.cmStatusBar.SuspendLayout();
@@ -65,6 +66,7 @@
 			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tbSearch,
             this.btnPlayPause,
+            this.cbSort,
             this.btnSearch});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip1.Name = "toolStrip1";
@@ -229,6 +231,13 @@
 			this.alphaFilterStatusStrip1.LetterClicked += new System.EventHandler(this.alphaFilterStatusStrip1_LetterClicked);
 			this.alphaFilterStatusStrip1.ShowAllClicked += new System.EventHandler(this.alphaFilterStatusStrip1_ShowAllClicked);
 			// 
+			// cbSort
+			// 
+			this.cbSort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cbSort.Name = "cbSort";
+			this.cbSort.Size = new System.Drawing.Size(121, 25);
+			this.cbSort.SelectedIndexChanged += new System.EventHandler(this.cbSort_SelectedIndexChanged);
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -283,6 +292,7 @@
 		private System.Windows.Forms.SplitContainer splcArtistsPlaylists;
 		private System.Windows.Forms.SplitContainer splcArtistAlbums;
 		private Controls.AlphaFilterStatusStrip alphaFilterStatusStrip1;
+		private System.Windows.Forms.ToolStripComboBox cbSort;
 	}
 }
 

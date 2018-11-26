@@ -7,6 +7,7 @@ using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -45,6 +46,8 @@ namespace Mp3Player.WinForm
 				tslRootPath.Text = _settings.RootFolder;
 				tslStatus.Text = "Ready";
 
+				FillSortOptions();
+
 				await LoadLibraryAsync();
 			}
 			catch (Exception exc)
@@ -53,24 +56,41 @@ namespace Mp3Player.WinForm
 			}
 		}
 
+		private void FillSortOptions()
+		{
+			cbSort.Items.Clear();
+			var names = Enum.GetNames(typeof(AllArtistsSortOptions)).OfType<string>().ToArray();
+			var values = Enum.GetValues(typeof(AllArtistsSortOptions)).OfType<AllArtistsSortOptions>().ToArray();
+			int index = 0;
+			foreach (string name in names)
+			{
+				var item = new ComboBoxItem<AllArtistsSortOptions>(values[index], names[index]);
+				cbSort.Items.Add(item);
+				if (values[index] == _settings.Sort) cbSort.SelectedItem = item;
+				index++;
+			}			
+		}
+
 		private async Task LoadLibraryAsync(Search search = null)
 		{
 			lvLibrary.Items.Clear();
 			using (var cn = GetConnection())
 			{
-				var allArtistsQry = new AllArtists();
+				var sort = ((cbSort.SelectedItem as ComboBoxItem<AllArtistsSortOptions>)?.Value ?? AllArtistsSortOptions.ArtistName);
+				var allArtistsQry = new AllArtists(sort);
 				if (!string.IsNullOrEmpty(search?.ArtistStartsWith)) allArtistsQry.ArtistStartsWith = search.ArtistStartsWith;
+				tslStatus.Text = "Querying...";
 				var allArtists = await allArtistsQry.ExecuteAsync(cn);
+				tslStatus.Text = "Ready";
 
 				var items = new AllArtistsListViewBuilder();
 				lvLibrary.Items.AddRange(items.GetListViewItems(allArtists, lvLibrary.Groups["AllArtists"]));
 
 				if (_letterGroups == null)
 				{
-					_letterGroups = allArtists.GroupBy(row => row.GetLetterGroup()).Select(grp => grp.Key).ToArray();
+					_letterGroups = allArtists.GroupBy(row => row.GetLetterGroup()).Select(grp => grp.Key).OrderBy(item => item).ToArray();
 				}
-				alphaFilterStatusStrip1.Load(_letterGroups, search?.ArtistStartsWith);
-				//foreach (var item in allArtists) allArtistsGrp.Items.AddRange()
+				alphaFilterStatusStrip1.Load(_letterGroups, search?.ArtistStartsWith);				
 				
 			}
 		}
@@ -99,7 +119,9 @@ namespace Mp3Player.WinForm
 
 		private void viewToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-
+			ProcessStartInfo psi = new ProcessStartInfo("explorer.exe");
+			psi.Arguments = _settings.RootFolder;
+			Process.Start(psi);
 		}
 
 		private async void refreshToolStripMenuItem_Click(object sender, EventArgs e)
@@ -151,6 +173,14 @@ namespace Mp3Player.WinForm
 		private async void alphaFilterStatusStrip1_ShowAllClicked(object sender, EventArgs e)
 		{
 			await LoadLibraryAsync();
+		}
+
+		private void cbSort_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (cbSort.SelectedItem != null)
+			{
+				_settings.Sort = (cbSort.SelectedItem as ComboBoxItem<AllArtistsSortOptions>).Value;
+			}			
 		}
 	}
 }
