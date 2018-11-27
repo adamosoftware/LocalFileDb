@@ -11,7 +11,7 @@ namespace Mp3Player.WinForm.Classes
 	public class SongPlayer : BindingList<Mp3File>, IDisposable
 	{
 		private IWavePlayer _player;
-		private AudioFileReader _reader;
+		private Mp3FileReader _reader;
 		private readonly string _basePath;
 		private bool _playNext = false;
 		private int _songIndex = 0;
@@ -25,6 +25,12 @@ namespace Mp3Player.WinForm.Classes
 			_player = new WaveOut();
 			_player.PlaybackStopped += PlaybackStopped;
 			_playNext = true;
+		}
+
+		public new void Add(Mp3File mp3File)
+		{			
+			base.Add(mp3File);
+			Play(Count - 1);
 		}
 
 		private void PlaybackStopped(object sender, StoppedEventArgs e)
@@ -65,9 +71,13 @@ namespace Mp3Player.WinForm.Classes
 		/// </summary>
 		public void Play(int index = 0)
 		{
+			_player.Stop();
+			
 			Current = this[index];
 
-			_reader = new AudioFileReader(Path.Combine(_basePath, Current.Path));
+			_reader?.Dispose();			
+			_reader = new Mp3FileReader(Path.Combine(_basePath, Current.Path));
+
 			_player.Init(_reader);
 			_player.Play();
 			SongPlaying?.Invoke(Current, new EventArgs());

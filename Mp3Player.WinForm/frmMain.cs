@@ -22,11 +22,13 @@ namespace Mp3Player.WinForm
 	{
 		private Settings _settings;
 		private string[] _letterGroups = null;
+		private SongPlayer _player = null;
 
 		public frmMain()
 		{
 			InitializeComponent();
 			dgvSearchResults.AutoGenerateColumns = false;
+			dgvPlayer.AutoGenerateColumns = false;
 		}
 
 		private IDbConnection GetConnection()
@@ -53,6 +55,9 @@ namespace Mp3Player.WinForm
 				FillSortOptions();
 
 				await LoadLibraryAsync();
+
+				_player = new SongPlayer(_settings.RootFolder);
+				dgvPlayer.DataSource = _player;
 			}
 			catch (Exception exc)
 			{
@@ -314,6 +319,12 @@ namespace Mp3Player.WinForm
 		{
 			var files = (e.Item as AlbumListViewItem)?.Files.ToArray();
 			if (files != null) dgvSearchResults.DataSource = files;
+		}
+
+		private void dgvSearchResults_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		{
+			var file = dgvSearchResults.Rows[e.RowIndex].DataBoundItem as Mp3File;
+			_player.Add(file);
 		}
 	}
 }

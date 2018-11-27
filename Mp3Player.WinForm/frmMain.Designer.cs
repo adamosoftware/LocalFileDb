@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.tslRootPath = new System.Windows.Forms.ToolStripStatusLabel();
@@ -66,10 +66,13 @@
 			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.dgvPlayer = new System.Windows.Forms.DataGridView();
+			this.colPlayerTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.statusStrip1.SuspendLayout();
 			this.cmStatusBar.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splcArtistsPlaylists)).BeginInit();
 			this.splcArtistsPlaylists.Panel1.SuspendLayout();
+			this.splcArtistsPlaylists.Panel2.SuspendLayout();
 			this.splcArtistsPlaylists.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splcArtistAlbums)).BeginInit();
 			this.splcArtistAlbums.Panel1.SuspendLayout();
@@ -82,6 +85,7 @@
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dgvPlayer)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// statusStrip1
@@ -190,6 +194,10 @@
 			// splcArtistsPlaylists.Panel1
 			// 
 			this.splcArtistsPlaylists.Panel1.Controls.Add(this.splcArtistAlbums);
+			// 
+			// splcArtistsPlaylists.Panel2
+			// 
+			this.splcArtistsPlaylists.Panel2.Controls.Add(this.dgvPlayer);
 			this.splcArtistsPlaylists.Size = new System.Drawing.Size(702, 381);
 			this.splcArtistsPlaylists.SplitterDistance = 461;
 			this.splcArtistsPlaylists.TabIndex = 2;
@@ -256,8 +264,8 @@
 			this.dgvSearchResults.AllowUserToAddRows = false;
 			this.dgvSearchResults.AllowUserToDeleteRows = false;
 			this.dgvSearchResults.AllowUserToResizeRows = false;
-			dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			this.dgvSearchResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+			dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.dgvSearchResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
 			this.dgvSearchResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvSearchResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colTrackNumber,
@@ -274,6 +282,7 @@
 			this.dgvSearchResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvSearchResults.Size = new System.Drawing.Size(461, 91);
 			this.dgvSearchResults.TabIndex = 0;
+			this.dgvSearchResults.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearchResults_CellDoubleClick);
 			// 
 			// colTrackNumber
 			// 
@@ -419,6 +428,27 @@
 			// 
 			this.columnHeader6.Text = "Song Count";
 			// 
+			// dgvPlayer
+			// 
+			this.dgvPlayer.AllowUserToAddRows = false;
+			this.dgvPlayer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvPlayer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colPlayerTitle});
+			this.dgvPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dgvPlayer.Location = new System.Drawing.Point(0, 0);
+			this.dgvPlayer.Name = "dgvPlayer";
+			this.dgvPlayer.ReadOnly = true;
+			this.dgvPlayer.Size = new System.Drawing.Size(237, 381);
+			this.dgvPlayer.TabIndex = 0;
+			// 
+			// colPlayerTitle
+			// 
+			this.colPlayerTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.colPlayerTitle.DataPropertyName = "Title";
+			this.colPlayerTitle.HeaderText = "Title";
+			this.colPlayerTitle.Name = "colPlayerTitle";
+			this.colPlayerTitle.ReadOnly = true;
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -438,6 +468,7 @@
 			this.statusStrip1.PerformLayout();
 			this.cmStatusBar.ResumeLayout(false);
 			this.splcArtistsPlaylists.Panel1.ResumeLayout(false);
+			this.splcArtistsPlaylists.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splcArtistsPlaylists)).EndInit();
 			this.splcArtistsPlaylists.ResumeLayout(false);
 			this.splcArtistAlbums.Panel1.ResumeLayout(false);
@@ -455,6 +486,7 @@
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.dgvPlayer)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -496,6 +528,8 @@
 		private System.Windows.Forms.ColumnHeader columnHeader4;
 		private System.Windows.Forms.ColumnHeader columnHeader5;
 		private System.Windows.Forms.ColumnHeader columnHeader6;
+		private System.Windows.Forms.DataGridView dgvPlayer;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colPlayerTitle;
 	}
 }
 
