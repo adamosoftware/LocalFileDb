@@ -87,5 +87,12 @@ namespace Mp3Player.Models.Queries
 				};
 			}
 		}
+
+		public static IEnumerable<AllArtists> GetTestCases()
+		{
+			yield return new AllArtists() { ArtistStartsWith = "a" };
+			yield return new AllArtists(AllArtistsSortOptions.LastPlayed) { ArtistStartsWith = "b" };
+			yield return new AllArtists(AllArtistsSortOptions.SongCount) { ArtistStartsWith = "c" };
+		}
 	}
 }
