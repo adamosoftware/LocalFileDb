@@ -21,71 +21,14 @@ namespace Tests
 		}
 		
 		[TestMethod]
-		public void TestMp3PlayerModelQueriesManual()
+		public void TestMp3PlayerModelQueries()
 		{
-			var queryTypes = new Type[]
-			{
-				typeof(AllArtists),
-				typeof(ArtistAlbums),
-				typeof(ArtistMp3Files),
-				typeof(SearchMp3Files)
-			};
+			IEnumerable<ITestableQuery> queries = QueryTesting.GetTestCases(Assembly.GetExecutingAssembly(), "Mp3Player.Models");
 
 			using (var cn = GetConnection())
-			{
-				foreach (var queryType in queryTypes)
-				{
-					var getTestCases = queryType.GetMethod("GetTestCases");
-					if (getTestCases?.IsStatic ?? false)
-					{
-						var testQueries = getTestCases.Invoke(queryType, null) as IEnumerable<ITestableQuery>;
-						foreach (var qry in testQueries)
-						{
-							qry.TestExecute(cn);
-						}
-					}
-				}
+			{				
+				foreach (var qry in queries) qry.TestExecute(cn);
 			}				
-		}
-
-		[TestMethod]
-		public void TestMp3PlayerModelQueriesAuto()
-		{
-			var modelAssembly = FindReferencedAssembly("Mp3Player.Models");
-			var allTypes = modelAssembly.GetExportedTypes();
-			var queryTypes = allTypes.Where(t => IsSubclassOfRawGeneric(typeof(Query<>), t));
-
-			using (var cn = GetConnection())
-			{
-				foreach (var qryType in queryTypes)
-				{
-					var getTestCasesMethod = qryType.GetMethod("GetTestCases");
-					if (getTestCasesMethod?.IsStatic ?? false)
-					{
-						//getTestCasesMethod.Invoke()
-					}
-				}
-			}
-		}
-
-		private Assembly FindReferencedAssembly(string assemblyName)
-		{
-			var name = Assembly.GetExecutingAssembly().GetReferencedAssemblies().Single(a => a.Name.Equals(assemblyName));
-			return Assembly.Load(name);
-		}
-
-		/// <summary>
-		/// From https://stackoverflow.com/a/457708/2023653
-		/// </summary>
-		private static bool IsSubclassOfRawGeneric(Type generic, Type toCheck)
-		{
-			while (toCheck != null && toCheck != typeof(object))
-			{
-				var currentType = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
-				if (generic == currentType) return true;
-				toCheck = toCheck.BaseType;
-			}
-			return false;
 		}
 	}
 }

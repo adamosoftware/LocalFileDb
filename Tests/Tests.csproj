@@ -51,8 +51,8 @@
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.4.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Postulate.Lite.Core, Version=1.2.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Postulate.Lite.Core.1.2.8\lib\net461\Postulate.Lite.Core.dll</HintPath>
+    <Reference Include="Postulate.Lite.Core, Version=1.2.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Postulate.Lite.Core.1.2.9\lib\net461\Postulate.Lite.Core.dll</HintPath>
     </Reference>
     <Reference Include="Postulate.Lite.SqlServer, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Postulate.Lite.SqlServer.1.2.6\lib\net461\Postulate.Lite.SqlServer.dll</HintPath>
