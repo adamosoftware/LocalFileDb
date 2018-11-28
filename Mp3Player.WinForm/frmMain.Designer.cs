@@ -49,6 +49,11 @@
 			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
 			this.cbSort = new System.Windows.Forms.ToolStripComboBox();
 			this.alphaFilterStatusStrip1 = new Mp3Player.WinForm.Controls.AlphaFilterStatusStrip();
+			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+			this.lvAlbums = new System.Windows.Forms.ListView();
+			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.dgvSearchResults = new System.Windows.Forms.DataGridView();
 			this.colTrackNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,11 +66,6 @@
 			this.btnSearch = new System.Windows.Forms.ToolStripButton();
 			this.btnPlayArtist = new System.Windows.Forms.ToolStripDropDownButton();
 			this.btnPlayAlbum = new System.Windows.Forms.ToolStripDropDownButton();
-			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.lvAlbums = new System.Windows.Forms.ListView();
-			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.dgvPlayer = new System.Windows.Forms.DataGridView();
 			this.colPlayerTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.statusStrip1.SuspendLayout();
@@ -79,12 +79,12 @@
 			this.splcArtistAlbums.Panel2.SuspendLayout();
 			this.splcArtistAlbums.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dgvSearchResults)).BeginInit();
-			this.toolStrip2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dgvSearchResults)).BeginInit();
+			this.toolStrip2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvPlayer)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -259,6 +259,53 @@
 			this.alphaFilterStatusStrip1.LetterClicked += new System.EventHandler(this.alphaFilterStatusStrip1_LetterClicked);
 			this.alphaFilterStatusStrip1.ShowAllClicked += new System.EventHandler(this.alphaFilterStatusStrip1_ShowAllClicked);
 			// 
+			// splitContainer1
+			// 
+			this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+			this.splitContainer1.Location = new System.Drawing.Point(0, 25);
+			this.splitContainer1.Name = "splitContainer1";
+			this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+			// 
+			// splitContainer1.Panel1
+			// 
+			this.splitContainer1.Panel1.Controls.Add(this.lvAlbums);
+			// 
+			// splitContainer1.Panel2
+			// 
+			this.splitContainer1.Panel2.Controls.Add(this.dgvSearchResults);
+			this.splitContainer1.Size = new System.Drawing.Size(461, 163);
+			this.splitContainer1.SplitterDistance = 68;
+			this.splitContainer1.TabIndex = 2;
+			// 
+			// lvAlbums
+			// 
+			this.lvAlbums.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
+			this.lvAlbums.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lvAlbums.Location = new System.Drawing.Point(0, 0);
+			this.lvAlbums.Name = "lvAlbums";
+			this.lvAlbums.Size = new System.Drawing.Size(461, 68);
+			this.lvAlbums.TabIndex = 0;
+			this.lvAlbums.TileSize = new System.Drawing.Size(228, 45);
+			this.lvAlbums.UseCompatibleStateImageBehavior = false;
+			this.lvAlbums.View = System.Windows.Forms.View.Tile;
+			this.lvAlbums.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvAlbums_ItemSelectionChanged);
+			// 
+			// columnHeader4
+			// 
+			this.columnHeader4.Text = "Name";
+			// 
+			// columnHeader5
+			// 
+			this.columnHeader5.Text = "Artist";
+			// 
+			// columnHeader6
+			// 
+			this.columnHeader6.Text = "Song Count";
+			// 
 			// dgvSearchResults
 			// 
 			this.dgvSearchResults.AllowUserToAddRows = false;
@@ -381,53 +428,6 @@
 			this.btnPlayAlbum.Size = new System.Drawing.Size(81, 22);
 			this.btnPlayAlbum.Text = "Play Album";
 			// 
-			// splitContainer1
-			// 
-			this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-			this.splitContainer1.Location = new System.Drawing.Point(0, 25);
-			this.splitContainer1.Name = "splitContainer1";
-			this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-			// 
-			// splitContainer1.Panel1
-			// 
-			this.splitContainer1.Panel1.Controls.Add(this.lvAlbums);
-			// 
-			// splitContainer1.Panel2
-			// 
-			this.splitContainer1.Panel2.Controls.Add(this.dgvSearchResults);
-			this.splitContainer1.Size = new System.Drawing.Size(461, 163);
-			this.splitContainer1.SplitterDistance = 68;
-			this.splitContainer1.TabIndex = 2;
-			// 
-			// lvAlbums
-			// 
-			this.lvAlbums.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4,
-            this.columnHeader5,
-            this.columnHeader6});
-			this.lvAlbums.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lvAlbums.Location = new System.Drawing.Point(0, 0);
-			this.lvAlbums.Name = "lvAlbums";
-			this.lvAlbums.Size = new System.Drawing.Size(461, 68);
-			this.lvAlbums.TabIndex = 0;
-			this.lvAlbums.TileSize = new System.Drawing.Size(228, 45);
-			this.lvAlbums.UseCompatibleStateImageBehavior = false;
-			this.lvAlbums.View = System.Windows.Forms.View.Tile;
-			this.lvAlbums.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvAlbums_ItemSelectionChanged);
-			// 
-			// columnHeader4
-			// 
-			this.columnHeader4.Text = "Name";
-			// 
-			// columnHeader5
-			// 
-			this.columnHeader5.Text = "Artist";
-			// 
-			// columnHeader6
-			// 
-			this.columnHeader6.Text = "Song Count";
-			// 
 			// dgvPlayer
 			// 
 			this.dgvPlayer.AllowUserToAddRows = false;
@@ -479,13 +479,13 @@
 			this.splcArtistAlbums.ResumeLayout(false);
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dgvSearchResults)).EndInit();
-			this.toolStrip2.ResumeLayout(false);
-			this.toolStrip2.PerformLayout();
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.dgvSearchResults)).EndInit();
+			this.toolStrip2.ResumeLayout(false);
+			this.toolStrip2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvPlayer)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();

@@ -1,8 +1,11 @@
 ﻿using Postulate.Lite.Core;
+using Postulate.Lite.Core.Interfaces;
+using System.Collections.Generic;
+using System.Data;
 
 namespace Mp3Player.Models.Queries
 {
-	public class SearchMp3Files : Query<Mp3File>
+	public class SearchMp3Files : Query<Mp3File>, ITestableQuery
 	{
 		public SearchMp3Files() : base(
 			@"SELECT
@@ -23,5 +26,15 @@ namespace Mp3Player.Models.Queries
 		}
 
 		public string Search { get; set; }
+
+		public static IEnumerable<ITestableQuery> GetTestCases()
+		{
+			yield return new SearchMp3Files() { Search = "Shallow" };
+		}
+
+		public IEnumerable<dynamic> TestExecute(IDbConnection connection)
+		{
+			return TestExecuteHelper(connection);
+		}
 	}
 }

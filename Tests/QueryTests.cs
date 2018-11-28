@@ -1,6 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Mp3Player.Models.Queries;
 using Postulate.Lite.Core;
+using Postulate.Lite.Core.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
@@ -16,9 +19,37 @@ namespace Tests
 			string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 			return new SqlConnection(connectionString);
 		}
+		
+		[TestMethod]
+		public void TestMp3PlayerModelQueriesManual()
+		{
+			var queryTypes = new Type[]
+			{
+				typeof(AllArtists),
+				typeof(ArtistAlbums),
+				typeof(ArtistMp3Files),
+				typeof(SearchMp3Files)
+			};
+
+			using (var cn = GetConnection())
+			{
+				foreach (var queryType in queryTypes)
+				{
+					var getTestCases = queryType.GetMethod("GetTestCases");
+					if (getTestCases?.IsStatic ?? false)
+					{
+						var testQueries = getTestCases.Invoke(queryType, null) as IEnumerable<ITestableQuery>;
+						foreach (var qry in testQueries)
+						{
+							qry.TestExecute(cn);
+						}
+					}
+				}
+			}				
+		}
 
 		[TestMethod]
-		public void TestQueries()
+		public void TestMp3PlayerModelQueriesAuto()
 		{
 			var modelAssembly = FindReferencedAssembly("Mp3Player.Models");
 			var allTypes = modelAssembly.GetExportedTypes();
@@ -50,11 +81,8 @@ namespace Tests
 		{
 			while (toCheck != null && toCheck != typeof(object))
 			{
-				var cur = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
-				if (generic == cur)
-				{
-					return true;
-				}
+				var currentType = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
+				if (generic == currentType) return true;
 				toCheck = toCheck.BaseType;
 			}
 			return false;

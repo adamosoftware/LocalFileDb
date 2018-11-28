@@ -1,4 +1,7 @@
 ﻿using Postulate.Lite.Core;
+using Postulate.Lite.Core.Interfaces;
+using System.Collections.Generic;
+using System.Data;
 
 namespace Mp3Player.Models.Queries
 {
@@ -10,7 +13,7 @@ namespace Mp3Player.Models.Queries
 		public int? Year { get; set; }
 	}
 
-	public class ArtistAlbums : Query<ArtistAlbumsResult>
+	public class ArtistAlbums : Query<ArtistAlbumsResult>, ITestableQuery
 	{
 		public ArtistAlbums() : base(
 			@"SELECT
@@ -32,5 +35,15 @@ namespace Mp3Player.Models.Queries
 		}
 
 		public string Artist { get; set; }
+
+		public static IEnumerable<ITestableQuery> GetTestCases()
+		{
+			yield return new ArtistAlbums() { Artist = "Sting" };
+		}
+
+		public IEnumerable<dynamic> TestExecute(IDbConnection connection)
+		{
+			return TestExecuteHelper(connection);
+		}
 	}
 }

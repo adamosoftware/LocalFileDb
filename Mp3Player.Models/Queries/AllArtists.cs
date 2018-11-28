@@ -1,7 +1,9 @@
 ﻿using Postulate.Lite.Core;
 using Postulate.Lite.Core.Attributes;
+using Postulate.Lite.Core.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Mp3Player.Models.Queries
 {
@@ -35,7 +37,7 @@ namespace Mp3Player.Models.Queries
 		}
 	}
 
-	public class AllArtists : Query<AllArtistsResult>
+	public class AllArtists : Query<AllArtistsResult>, ITestableQuery
 	{
 		public AllArtists(AllArtistsSortOptions sort = AllArtistsSortOptions.ArtistName) : base(
 			$@"WITH [albums] AS (
@@ -88,11 +90,16 @@ namespace Mp3Player.Models.Queries
 			}
 		}
 
-		public static IEnumerable<AllArtists> GetTestCases()
+		public static IEnumerable<ITestableQuery> GetTestCases()
 		{
 			yield return new AllArtists() { ArtistStartsWith = "a" };
 			yield return new AllArtists(AllArtistsSortOptions.LastPlayed) { ArtistStartsWith = "b" };
 			yield return new AllArtists(AllArtistsSortOptions.SongCount) { ArtistStartsWith = "c" };
+		}
+
+		public IEnumerable<dynamic> TestExecute(IDbConnection connection)
+		{
+			return TestExecuteHelper(connection);
 		}
 	}
 }
