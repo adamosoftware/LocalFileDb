@@ -44,8 +44,8 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Postulate.Lite.Core, Version=1.2.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Postulate.Lite.Core.1.2.9\lib\net461\Postulate.Lite.Core.dll</HintPath>
+    <Reference Include="Postulate.Lite.Core, Version=1.2.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Postulate.Lite.Core.1.2.11\lib\net461\Postulate.Lite.Core.dll</HintPath>
     </Reference>
     <Reference Include="Postulate.Lite.SqlServer, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Postulate.Lite.SqlServer.1.2.6\lib\net461\Postulate.Lite.SqlServer.dll</HintPath>
